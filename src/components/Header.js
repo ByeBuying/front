@@ -1,7 +1,8 @@
 import AppLogo from '../logo.svg';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-function Header({hiddenSearchBar, setHiddenSearchBar, searchText, setSearchText}) {
+function Header({ hiddenSearchBar, setHiddenSearchBar, searchText, setSearchText }) {
     const handleSubmit = (e) => {
         e.preventDefault();
     }
@@ -10,14 +11,11 @@ function Header({hiddenSearchBar, setHiddenSearchBar, searchText, setSearchText}
         setSearchText(e.target.value);
     }
 
-    const navigateToLogin = () => {
-        console.log("navi");
-        // navigate("/route");
-    }
-
     return (
         <div className="flex mx-100 w-full h-24 justify-between mt-8">
-            <img className="object-contain w-1/3" src={AppLogo} alt="app_logo" />
+            <Link to='/' className="flex w-1/3 justify-center object-contain">
+                <img src={AppLogo} alt="app_logo" />
+            </Link>
             <div className="w-1/3">
                 <form
                     className={hiddenSearchBar ? "hidden" : "mt-8 relative"}
@@ -42,16 +40,20 @@ function Header({hiddenSearchBar, setHiddenSearchBar, searchText, setSearchText}
             </div>
 
             <div className="flex w-1/3 justify-center items-center gap-5">
-                <button className="w-14" onClick={navigateToLogin}>
-                    <img src={AppLogo} alt="login_img" />로그인
+                <button className="w-14">
+                    <Link to='/login' >
+                        <img src={AppLogo} alt="login_img" />로그인
+                    </Link>
                 </button>
-                <button onClick={navigateToLogin}>
-                    <img src={AppLogo} alt="login_img" />회원가입
+                <button>
+                    <Link to='/general_register' >
+                        <img src={AppLogo} alt="login_img" />회원가입
+                    </Link>
                 </button>
-                <button onClick={navigateToLogin}>
+                <button>
                     <img src={AppLogo} alt="login_img" />고객센터
                 </button>
-                <button onClick={navigateToLogin}>
+                <button>
                     <img src={AppLogo} alt="login_img" />장바구니
                 </button>
             </div>
