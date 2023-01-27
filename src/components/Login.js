@@ -1,11 +1,17 @@
 import React from 'react';
+import '../css/Common.css';
 import AppLogo from '../logo.svg'
+import axios from 'axios';
 
 function Login() {
+    const requestLogin = (email, password) => {
+        
+    }
+
     return (
-        <div>
-            <div className="flex mt-32 h-20 justify-center mb-10">
-                <button className="w-40 border">회원 로그인</button>
+        <div className="content-margin">
+            <div className="flex h-20 justify-center mb-10">
+                <button className="w-40 border" onClick={requestLogin}>회원 로그인</button>
                 <button className="w-40 border" >비회원 주문조회</button>
             </div>
             <form className="grid items-center justify-center mb-10">
