@@ -8,7 +8,7 @@ function Main() {
         <div>
             <Header />
 
-            <section className="mx-100">
+            <section>
                 {/* Components */}
                 <Outlet />
             </section>

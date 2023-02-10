@@ -31,7 +31,7 @@ function Login() {
                             className="SaveIdCheckbox"
                             id="checkbox"
                             type="checkbox" />
-                        <label for="checkbox">아이디 저장</label>
+                        <label htmlFor="checkbox">아이디 저장</label>
                     </div>
                     <button type="button">아이디/비밀번호 찾기</button>
                 </div>

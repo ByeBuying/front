@@ -54,7 +54,7 @@ function Header() {
                 <button className="ImageButton" onClick={() => movePage('/login')} >
                     <img src={AppLogo} alt="login_img" />로그인
                 </button>
-                <button className="ImageButton" onClick={() => movePage('/general_register')}>
+                <button className="ImageButton" onClick={() => movePage('/register')}>
                     <img src={AppLogo} alt="login_img" />회원가입
                 </button>
                 <button className="ImageButton">
