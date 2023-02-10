@@ -13,8 +13,6 @@ function App() {
           <Route path="/login" element={ <Login /> }/>
           <Route path="/general_register" element= { <GeneralRegister /> }/>
         </Route>
-        
-        
       </Routes>
 
     </div>

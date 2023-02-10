@@ -1,6 +1,4 @@
 import React from 'react';
-import '../css/Common.css';
-import '../css/Font.css';
 import AppLogo from '../logo.svg'
 
 function GeneralRegister() {
