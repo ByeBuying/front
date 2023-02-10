@@ -1,0 +1,111 @@
+.Footer {
+    position: relative;
+    display: flex;
+    background-color: rgba(0, 0, 0, 1);
+    padding: 60px 40px;
+    align-items: center;
+    height: 350px;
+}
+
+.LeftContents {
+    width: 75%;
+}
+
+.TermsAndConditions {
+    position: absolute;
+    top: 0;
+    margin-top: 60px;
+    display: flex;
+    gap: 40px;
+    color: rgba(255, 255, 255, 1);
+}
+
+.CompanyInfo {
+    display: flex;
+    color: rgba(163, 163, 163, 1);
+    gap: 10px;
+}
+
+.Copyright {
+    position: absolute;
+    bottom: 0;
+    color: rgba(82, 82, 82, 1);
+    margin-bottom: 60px;
+}
+
+.RightContents {
+    width: 25%;
+    align-items: center;
+}
+
+.CustomerService {
+    position: absolute;
+    top: 0;
+    font-size: 18px;
+    color:rgba(255, 255, 255, 1);
+    margin-top: 90px;
+}
+
+.PhoneNumber {
+    font-size: 34px;
+    color:rgba(255, 255, 255, 1);
+}
+
+.Comment {
+    color: rgba(163, 163, 163, 1);
+}
+
+.Demend {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    gap: 30px;
+    margin-bottom: 60px;
+    color:rgba(255, 255, 255, 1);
+}
+
+@media screen and (max-width: 1080px) {
+    .Footer {
+        padding: 60px 40px;
+    }
+    
+    .LeftContents {
+        width: 85%;
+    }
+    
+    .TermsAndConditions {
+        gap: 20px;
+        font-size: 14px;
+    }
+    
+    .CompanyInfo {
+        gap: 20px;
+        font-size: 14px;
+    }
+    
+    .Copyright {
+        font-size: 14px;
+    }
+    
+    .RightContents {
+        width: 15%;
+    }
+    
+    .CustomerService {
+        font-size: 14px;
+    }
+    
+    .PhoneNumber {
+        font-size: 18px;
+        color:rgba(255, 255, 255, 1);
+    }
+    
+    .Comment {
+        font-size: 14px;
+    }
+    
+    .Demend {
+        gap: 20px;
+        font-size: 14px;
+    }
+}

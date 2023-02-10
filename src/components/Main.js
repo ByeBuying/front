@@ -4,19 +4,11 @@ import Footer from './Footer';
 import { Link, Outlet } from 'react-router-dom';
 
 function Main() {
-    const [hiddenSearchBar, setHiddenSearchBar] = useState(false);
-    const [searchText, setSearchText] = useState("");
-
     return (
         <div>
-            <Header
-                hiddenSearchBar={false}
-                setHiddenSearchBar={setHiddenSearchBar}
-                searchText={""}
-                setSearchText={setSearchText}
-            />
+            <Header />
 
-            <section className="mx-100">
+            <section>
                 {/* Components */}
                 <Outlet />
             </section>
