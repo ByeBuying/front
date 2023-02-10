@@ -1,6 +1,6 @@
 import AppLogo from '../logo.svg';
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './css/Header.css'
 
 function Header() {
@@ -16,21 +16,16 @@ function Header() {
         setSearchText(e.target.value);
     }
 
-    const toMainPage = () => {
-        setHiddenSearchBar(false);
+    const movePage = (pageName) => {
+        pageName === '/' ? setHiddenSearchBar(false) : setHiddenSearchBar(true);
         setSearchText("");
-        navigate('/');
-    }
-
-    const toLoginPage = () => {
-        setHiddenSearchBar(true);
-        navigate('/login');
+        navigate(pageName);
     }
 
     return (
         // flex mx-96 w-full h-24 justify-between mt-8
         <div className="Header">
-            <img className="Logo" src={AppLogo} alt="app_logo" onClick={toMainPage}/>
+            <img className="Logo" src={AppLogo} alt="app_logo" onClick={() => movePage('/')}/>
             <div className="MidMenuBar">
                 <form
                     className={hiddenSearchBar ? "hidden" : "SearchForm"}
@@ -56,13 +51,11 @@ function Header() {
             </div>
 
             <div className="SideMenuBar">
-                <button className="ImageButton" onClick={toLoginPage}>
+                <button className="ImageButton" onClick={() => movePage('/login')} >
                     <img src={AppLogo} alt="login_img" />로그인
                 </button>
-                <button className="ImageButton">
-                    <Link to='/general_register' >
-                        <img src={AppLogo} alt="login_img" />회원가입
-                    </Link>
+                <button className="ImageButton" onClick={() => movePage('/general_register')}>
+                    <img src={AppLogo} alt="login_img" />회원가입
                 </button>
                 <button className="ImageButton">
                     <img src={AppLogo} alt="login_img" />고객센터
