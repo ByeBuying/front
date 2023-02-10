@@ -1,9 +1,13 @@
 import AppLogo from '../logo.svg';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './css/Header.css'
 
-function Header({ hiddenSearchBar, setHiddenSearchBar, searchText, setSearchText }) {
+function Header() {
+    const [hiddenSearchBar, setHiddenSearchBar] = useState(false);
+    const [searchText, setSearchText] = useState("");
+    const navigate = useNavigate();
+
     const handleSubmit = (e) => {
         e.preventDefault();
     }
@@ -12,12 +16,21 @@ function Header({ hiddenSearchBar, setHiddenSearchBar, searchText, setSearchText
         setSearchText(e.target.value);
     }
 
+    const toMainPage = () => {
+        setHiddenSearchBar(false);
+        setSearchText("");
+        navigate('/');
+    }
+
+    const toLoginPage = () => {
+        setHiddenSearchBar(true);
+        navigate('/login');
+    }
+
     return (
         // flex mx-96 w-full h-24 justify-between mt-8
         <div className="Header">
-            <Link to='/' className="Logo">
-                <img src={AppLogo} alt="app_logo" />
-            </Link>
+            <img className="Logo" src={AppLogo} alt="app_logo" onClick={toMainPage}/>
             <div className="MidMenuBar">
                 <form
                     className={hiddenSearchBar ? "hidden" : "SearchForm"}
@@ -43,10 +56,8 @@ function Header({ hiddenSearchBar, setHiddenSearchBar, searchText, setSearchText
             </div>
 
             <div className="SideMenuBar">
-                <button className="ImageButton">
-                    <Link to='/login' >
-                        <img src={AppLogo} alt="login_img" />로그인
-                    </Link>
+                <button className="ImageButton" onClick={toLoginPage}>
+                    <img src={AppLogo} alt="login_img" />로그인
                 </button>
                 <button className="ImageButton">
                     <Link to='/general_register' >

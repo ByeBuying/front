@@ -11,6 +11,7 @@
     width: 33%;
     justify-content: center;
     object-fit: contain;
+    cursor: pointer;
 }
 
 .MidMenuBar {
