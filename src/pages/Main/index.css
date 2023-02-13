@@ -1,0 +1,9 @@
+.Main {
+    margin: 80px 200px;
+}
+
+@media screen and (max-width: 1080px) {
+    .Main {
+        margin: 80px 150px;
+    }
+}

@@ -1,0 +1,36 @@
+.Notice {
+    display: flex;
+    flex-direction: row;
+    width: 800px;
+    height: 400px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.ImgFrame {
+    width: inherit;
+    height: inherit;
+}
+
+.swiper-pagination-bullet {
+    background: gray !important;
+    opacity: 0.5 !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: white !important;
+}
+
+.swiper-button-prev {
+    color: gray !important;
+}
+
+.swiper-button-next {
+    color: gray !important;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-size: 1.3rem !important;
+    font-weight: 600 !important;
+}
