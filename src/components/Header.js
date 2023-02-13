@@ -25,7 +25,9 @@ function Header() {
     return (
         // flex mx-96 w-full h-24 justify-between mt-8
         <div className="Header">
-            <img className="Logo" src={AppLogo} alt="app_logo" onClick={() => movePage('/')}/>
+            <div className="Logo">
+                <img src={AppLogo} alt="app_logo" onClick={() => movePage('/')}/>
+            </div>
             <div className="MidMenuBar">
                 <form
                     className={hiddenSearchBar ? "hidden" : "SearchForm"}
