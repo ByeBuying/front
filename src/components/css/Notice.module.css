@@ -1,0 +1,13 @@
+.Notice {
+    display: flex;
+    flex-direction: row;
+    width: 800px;
+    height: 400px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.ImgFrame {
+    width: inherit;
+    height: inherit;
+}
