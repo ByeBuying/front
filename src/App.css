@@ -5,3 +5,27 @@
 .App {
     min-width: 780px;
 }
+
+/* Swiper css */
+.swiper-pagination-bullet {
+    background: gray !important;
+    opacity: 0.5 !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: white !important;
+}
+
+.swiper-button-prev {
+    color: gray !important;
+}
+
+.swiper-button-next {
+    color: gray !important;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-size: 1.3rem !important;
+    font-weight: 600 !important;
+}

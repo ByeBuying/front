@@ -1,0 +1,6 @@
+.SlideContainer {
+    display: flex;
+    width: 100%;
+    display: inline-block;
+    min-width: 200px;
+}

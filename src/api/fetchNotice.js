@@ -32,10 +32,7 @@ async function fetchNotice() {
         });
     });
 
-    // 데이터 가공 후 바로 return하면 Promise 객체가 아니기 때문에 컴포넌트에서 못받음
-    // (Notice 컴포넌트에서 fetchNotice() 호출해도 즉시 다음코드 실행하기때문에 빈 배열로 인식함)
-    return new Promise((resolve, reject) => {
-        resolve(array);
-    });
+    // * async 함수는 항상 Promise를 반환한다.
+    return array; // Promise.resolve
 }
 export default fetchNotice;
