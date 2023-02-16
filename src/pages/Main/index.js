@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import fetchNotice from '../../api/fetchNotice';
+import ImgEvent from '../../components/ImgEvent';
 import Notice from '../../components/Notice';
 import ProductRanking from '../../components/ProductRanking';
 import Products from '../../components/Products';
@@ -30,6 +31,8 @@ function Main() {
             <Products products={newItems}/>
             <h2 className="mt-20 mb-10"></h2>
             <ProductRanking products={rankingItems}/>
+            <h2 className="mt-20 mb-10"></h2>
+            <ImgEvent />
         </div>
     );
 }
