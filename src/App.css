@@ -4,6 +4,7 @@
 
 .App {
     min-width: 780px;
+    overflow-x: hidden;
 }
 
 /* Swiper css */
