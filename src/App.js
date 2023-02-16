@@ -5,10 +5,12 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import TextEvent from './components/TextEvent';
 
 function Layout() {
   return (
     <div>
+      <TextEvent pageLink={'/'} />
       <Header />
       <section>
         <Outlet />
