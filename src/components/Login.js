@@ -1,54 +1,74 @@
-import React from 'react';
-import '../css/Common.css';
+import React, { useState } from 'react';
+import './css/Login.css'
 import AppLogo from '../logo.svg'
-import axios from 'axios';
+import fetchLoginState from '../api/fetchLoginState';
 
 function Login() {
-    const requestLogin = (email, password) => {
-        
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleChangeEmail = (e) => {
+        setEmail(e.target.value);
+    }
+
+    const handleChangePassword = (e) => {
+        setPassword(e.target.value);
+    }
+
+
+    const requestLogin = (e) => {
+        e.preventDefault();
+        // API 호출
+        fetchLoginState(email, password);
+
     }
 
     return (
-        <div className="content-margin">
-            <div className="flex h-20 justify-center mb-10">
-                <button className="w-40 border" onClick={requestLogin}>회원 로그인</button>
-                <button className="w-40 border" >비회원 주문조회</button>
+        <div className="Login">
+            <div className="TopButtonDiv">
+                <button className="Member" >회원 로그인</button>
+                <button className="NonMember" >비회원 주문조회</button>
             </div>
-            <form className="grid items-center justify-center mb-10">
+            <form className="LoginForm" onSubmit={requestLogin}>
                 <input
-                    className="h-16 w-80 border-b border-gray-100"
-                    type="text"
-                    placeholder='아이디'
+                    className="Id"
+                    type="email"
+                    placeholder='이메일'
+                    value={email}
+                    onChange={handleChangeEmail}
                 />
                 <input
-                    className="h-16 border-b border-gray-100"
+                    className="Password"
                     type="password"
                     placeholder='비밀번호'
+                    value={password}
+                    onChange={handleChangePassword}
                 />
-                <div className="flex justify-between my-5">
+                <div className="Div">
                     <div>
                         <input
-                            className="mr-1"
+                            className="SaveIdCheckbox"
                             id="checkbox"
                             type="checkbox" />
-                        <label for="checkbox">아이디 저장</label>
+                        <label htmlFor="checkbox">아이디 저장</label>
                     </div>
                     <button type="button">아이디/비밀번호 찾기</button>
                 </div>
-                <button className="h-14 text-white bg-[#5223CB] my-5" type="button">로그인</button>
-                <button className="h-14 text-[#5223CB] border" type="button">회원가입</button>
+                <button className="LoginButton" type="submit">로그인</button>
+                <button className="RegisterButton" type="button">회원가입</button>
             </form>
-            <span className="flex justify-center mb-10">간편 로그인</span>
-            <div className="flex justify-center gap-2">
-                <button className="w-16">
-                    <img src={AppLogo}/>
-                </button>
-                <button className="w-16">
-                    <img src={AppLogo}/>
-                </button>
-                <button className="w-16">
-                    <img src={AppLogo}/>
-                </button>
+            <div className="SimpleLoginDiv"> 간편 로그인
+                <div className="LoginApiButtons">
+                    <button className="w-14">
+                        <img src={AppLogo} />
+                    </button>
+                    <button className="w-14">
+                        <img src={AppLogo} />
+                    </button>
+                    <button className="w-14">
+                        <img src={AppLogo} />
+                    </button>
+                </div>
             </div>
         </div>
     );
