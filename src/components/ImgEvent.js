@@ -1,21 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import AppLogo from '../logo.svg';
 
 function ImgEvent() {
-  return (
-    <Contents innerWidth={window.innerWidth}>
-        <TextDiv>
-            <p className="text-2xl text-white font-semibold">2023 HAPPY NEW YEAR</p>
-            <p className="text-xs text-white">매일을 더욱 특별하게</p>
-            <Link className="mt-5 text-xs text-[#FF9900]" to>보러가기 {">"}</Link>
-        </TextDiv>
-        <ImgDiv>
-            <StyledImg src={AppLogo}/>
-        </ImgDiv>
-    </Contents>
-  )
+    const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        window.addEventListener("resize", () => {
+            setInnerWidth(window.innerWidth);
+        });
+
+        return () => {
+            window.removeEventListener("resize", () => {});
+        };
+    },[]);
+
+    return (
+        <Contents innerWidth={innerWidth}>
+            <TextDiv>
+                <p className="text-2xl text-white font-semibold">2023 HAPPY NEW YEAR</p>
+                <p className="text-xs text-white">매일을 더욱 특별하게</p>
+                <Link className="mt-5 text-xs text-[#FF9900]" to>보러가기 {">"}</Link>
+            </TextDiv>
+            <ImgDiv>
+                <StyledImg src={AppLogo} />
+            </ImgDiv>
+        </Contents>
+    )
 }
 export default ImgEvent;
 

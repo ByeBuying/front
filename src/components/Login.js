@@ -20,7 +20,6 @@ function Login() {
         e.preventDefault();
         // API 호출
         fetchLoginState(email, password);
-
     }
 
     return (
