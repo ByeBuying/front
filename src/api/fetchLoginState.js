@@ -1,13 +1,16 @@
 import axios from '../api/axios';
 
 async function fetchLoginState(_email, _password) {
-    const response = await axios.post('/login', {
+    await axios.post('/login', {
         email: _email,
         password: _password
-    }, {
+    },{
         withCredentials: true
-    })
+    }).then(data => {
+        console.log("success");
 
-    console.log(response);
+    }).catch(error => {
+        console.log(error);
+    })
 }
 export default fetchLoginState;
