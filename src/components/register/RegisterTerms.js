@@ -1,36 +1,18 @@
-import React, { useCallback, useRef } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import AppLogo from '../logo.svg'
+import RegisterState from './RegisterState';
+
 
 function Register() {
-    const arrayRef = useRef([]);
-
-    const expandContents = useCallback(node => {
-
-    });
-
     return (
         <Contents>
             <KakaoRegisterButton>
                 <p>카카오톡 1초 회원가입</p>
             </KakaoRegisterButton>
 
-            <ProcessDiv>
-                <ImageDiv>
-                    <img src={AppLogo} />
-                    <p>약관동의</p>
-                </ImageDiv>
-                <img className="w-[22px]" src={AppLogo} />
-                <ImageDiv>
-                    <img src={AppLogo} />
-                    <p>회원정보 입력</p>
-                </ImageDiv>
-                <img className="w-[22px]" src={AppLogo} />
-                <ImageDiv>
-                    <img src={AppLogo} />
-                    <p>회원정보 완료</p>
-                </ImageDiv>
-            </ProcessDiv>
+            <RegisterState />
+
             <TermsDetails text={"쇼핑몰 이용약관"}>
                 <TermsSummary>
                     <label><input type="checkbox"/> 동의합니다.</label>
@@ -91,7 +73,7 @@ function Register() {
                     긴 문장 긴 문장 긴 문장 긴 문장 긴 문장 긴 문장 긴 문장 긴 문장
                 </p>
             </TermsDetails>
-            <NextButton>
+            <NextButton to="/registerForm">
                 <p className="text-white">약관동의</p>
             </NextButton>
         </Contents>
@@ -163,7 +145,7 @@ const TermsDetails = styled.details`
     }
 `
 
-const NextButton = styled.button`
+const NextButton = styled(Link)`
     display: flex;
     width: 450px;
     height: 56px;
