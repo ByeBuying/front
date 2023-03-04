@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
 import './css/Login.css'
 import AppLogo from '../logo.svg'
-import fetchLoginState from '../api/fetchLoginState';
+import fetchLogin from '../api/fetchLogin';
 
 function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [inputs, setInputs] = useState({
+        email: "",
+        password: ""
+    });
 
-    const handleChangeEmail = (e) => {
-        setEmail(e.target.value);
+    const handleChange = (e) => {
+        setInputs({
+            ...inputs,
+            [e.target.name]: e.target.value
+        });
     }
-
-    const handleChangePassword = (e) => {
-        setPassword(e.target.value);
-    }
-
 
     const requestLogin = (e) => {
         e.preventDefault();
-        // API 호출
-        fetchLoginState(email, password);
+        fetchLogin(inputs);
     }
 
     return (
@@ -30,18 +29,18 @@ function Login() {
             </div>
             <form className="LoginForm" onSubmit={requestLogin}>
                 <input
+                    name="email"
                     className="Id"
                     type="email"
                     placeholder='이메일'
-                    value={email}
-                    onChange={handleChangeEmail}
+                    onChange={handleChange}
                 />
                 <input
+                    name="password"
                     className="Password"
                     type="password"
                     placeholder='비밀번호'
-                    value={password}
-                    onChange={handleChangePassword}
+                    onChange={handleChange}
                 />
                 <div className="Div">
                     <div>
