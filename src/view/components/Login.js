@@ -1,48 +1,51 @@
 import React, { useState } from 'react';
 import './css/Login.css'
-import AppLogo from '../logo.svg'
-import fetchLoginState from '../api/fetchLoginState';
+import AppLogo from '../../logo.svg'
+import fetchLogin from '../../api/fetchLogin';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
+    
+    const [inputs, setInputs] = useState({
+        email: "",
+        password: ""
+    });
 
-    const handleChangeEmail = (e) => {
-        setEmail(e.target.value);
+    const handleChange = (e) => {
+        setInputs({
+            ...inputs,
+            [e.target.name]: e.target.value
+        });
     }
-
-    const handleChangePassword = (e) => {
-        setPassword(e.target.value);
-    }
-
 
     const requestLogin = (e) => {
         e.preventDefault();
-        // API 호출
-        fetchLoginState(email, password);
+        // fetchLogin(inputs);
+        dispatch(fetchLogin(inputs));
 
     }
 
     return (
         <div className="Login">
             <div className="TopButtonDiv">
-                <button className="Member" >회원 로그인</button>
+                <button className="Member" >회원 로그인 </button>
                 <button className="NonMember" >비회원 주문조회</button>
             </div>
             <form className="LoginForm" onSubmit={requestLogin}>
                 <input
+                    name="email"
                     className="Id"
                     type="email"
                     placeholder='이메일'
-                    value={email}
-                    onChange={handleChangeEmail}
+                    onChange={handleChange}
                 />
                 <input
+                    name="password"
                     className="Password"
                     type="password"
                     placeholder='비밀번호'
-                    value={password}
-                    onChange={handleChangePassword}
+                    onChange={handleChange}
                 />
                 <div className="Div">
                     <div>

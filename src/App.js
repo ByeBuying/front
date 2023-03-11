@@ -1,11 +1,12 @@
 import './App.css';
 import { Routes, Route, Outlet } from 'react-router-dom';
-import Main from './pages/Main';
-import Login from './components/Login';
-import Register from './components/Register';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import TextEvent from './components/TextEvent';
+import Main from './view/pages/Main';
+import Login from './view/components/Login';
+import RegisterTerms from './view/components/register/RegisterTerms';
+import Header from './view/components/Header';
+import Footer from './view/components/Footer';
+import TextEvent from './view/components/TextEvent';
+import RegisterForm from './view/components/register/RegisterForm';
 
 function Layout() {
   return (
@@ -27,12 +28,12 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />}/>
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/register" element={<RegisterTerms />} />
+          <Route path="/registerForm" element={<RegisterForm />} />
         </Route>
       </Routes>
 
     </div>
   );
 }
-
 export default App;
