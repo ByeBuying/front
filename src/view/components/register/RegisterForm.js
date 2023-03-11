@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import fetchAccountsNormal from '../../api/fetchAccountsNormal';
+import fetchAccountsNormal from '../../../api/fetchAccountsNormal';
 import RegisterState from './RegisterState';
 
 function RegisterForm() {
@@ -28,14 +28,14 @@ function RegisterForm() {
             <RegisterState />
             <StyledForm>
                 <InputDiv>
-                    <p className="w-[120px]">이름</p>
+                    <InputLabelP>이름</InputLabelP>
                     <input type="text" className="w-[200px] border-b-2 border-black"
                         name="name"
                         onChange={handleChange}
                     />
                 </InputDiv>
                 <InputDiv>
-                    <p className="w-[120px]">이메일</p>
+                    <InputLabelP>이메일</InputLabelP>
                     <input type="text" className="w-[200px] border-b-2 border-black"
                         name="email"
                         onChange={handleChange}
@@ -43,37 +43,37 @@ function RegisterForm() {
                     <button type="button" className="top-0 w-[100px] h-[35px] ml-[10px] border rounded border-[#7F7F7F]">중복확인</button>
                 </InputDiv>
                 <InputDiv>
-                    <p className="w-[120px]">비밀번호</p>
+                    <InputLabelP>비밀번호</InputLabelP>
                     <input type="password" className="w-[200px] border-b-2 border-black"
                         name="password"
                         onChange={handleChange}
                     />
                 </InputDiv>
                 <InputDiv>
-                    <p className="w-[120px]">비밀번호 확인</p>
+                    <InputLabelP>비밀번호 확인</InputLabelP>
                     <input type="password" className="w-[200px] border-b-2 border-black" />
                 </InputDiv>
                 <InputDiv>
-                    <p className="w-[120px]">생년월일</p>
+                    <InputLabelP>생년월일</InputLabelP>
                     <input type="date" className="w-[200px] border-b-2 border-black"
                         name="birthDay"
                         onChange={handleChange}
                     />
                 </InputDiv>
                 <InputDiv>
-                    <p className="w-[120px]">휴대폰</p>
+                    <InputLabelP>휴대폰</InputLabelP>
                     <input type="text" className="w-[200px] border-b-2 border-black" />
                     <button type="button" className="top-0 w-[100px] h-[35px] ml-[10px] border rounded border-[#7F7F7F]">휴대폰 인증</button>
                 </InputDiv>
                 <InputDiv>
-                    <p className="w-[120px]">메일수신여부</p>
+                    <InputLabelP>메일수신여부</InputLabelP>
                     <div className="flex justify-between w-[150px]">
                         <label><input type="radio" name="radio" checked /> 예</label>
                         <label><input type="radio" name="radio" /> 아니오</label>
                     </div>
                 </InputDiv>
                 <InputDiv>
-                    <p className="w-[120px]">추천인 이메일</p>
+                    <InputLabelP>추천인 이메일</InputLabelP>
                     <input type="text" className="w-[200px] border-b-2 border-black" />
                 </InputDiv>
             </StyledForm>
@@ -111,6 +111,10 @@ const InputDiv = styled.div`
     width: 450px;
     height: 50px;
     margin-bottom: 20px;
+`
+
+const InputLabelP = styled.p`
+    width: 120px;
 `
 
 const BottomButtonDiv = styled.div`

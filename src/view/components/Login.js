@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import './css/Login.css'
-import AppLogo from '../logo.svg'
-import fetchLogin from '../api/fetchLogin';
+import AppLogo from '../../logo.svg'
+import fetchLogin from '../../api/fetchLogin';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Login() {
+    const dispatch = useDispatch();
+    
     const [inputs, setInputs] = useState({
         email: "",
         password: ""
@@ -18,13 +21,15 @@ function Login() {
 
     const requestLogin = (e) => {
         e.preventDefault();
-        fetchLogin(inputs);
+        // fetchLogin(inputs);
+        dispatch(fetchLogin(inputs));
+
     }
 
     return (
         <div className="Login">
             <div className="TopButtonDiv">
-                <button className="Member" >회원 로그인</button>
+                <button className="Member" >회원 로그인 </button>
                 <button className="NonMember" >비회원 주문조회</button>
             </div>
             <form className="LoginForm" onSubmit={requestLogin}>
