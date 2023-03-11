@@ -1,4 +1,4 @@
-import AppLogo from '../logo.svg';
+import AppLogo from '../../logo.svg';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './css/Header.css'

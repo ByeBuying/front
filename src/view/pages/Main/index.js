@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import fetchNotice from '../../api/fetchNotice';
+import fetchNotice from '../../../api/fetchNotice';
 import ImgEvent from '../../components/ImgEvent';
 import Notice from '../../components/Notice';
 import ProductRanking from '../../components/ProductRanking';
@@ -22,8 +23,14 @@ function Main() {
         });
     }, []);
 
+    const user = useSelector(state => state.LoginUser.data);
+    console.log("user:", user);
+
     return (
         <Contents>
+            <div>
+                <p>test: {user.name}</p>
+            </div>
             <Notice notice={notice}/>
             <StyledHeaderText>인기 상품</StyledHeaderText>
             <Products products={popularItems}/>
