@@ -4,6 +4,7 @@ import axios from './axios';
 const Code = {
     SUCCESS: "CMN-001",
     BAD_CREDENTIALS: "ATE-004"
+    // ... //
 }
 Object.freeze(Code);
 
