@@ -16,7 +16,7 @@ function Main() {
     useEffect(() => {
         // Fetch Datas
         fetchNotice().then(data => {
-            setNotice(data)
+            setNotice(data);
             setPopularItems(data);
             setNewItems(data);
             setRankingItems(data);
