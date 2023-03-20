@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './css/Login.css'
 import AppLogo from '../../logo.svg'
 import fetchLogin from '../../api/fetchLogin';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 function Login() {
     const dispatch = useDispatch();

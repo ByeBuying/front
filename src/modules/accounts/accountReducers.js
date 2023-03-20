@@ -10,9 +10,6 @@ export const loginUserSlice = createSlice({
         },
 
         // ... //
-    },
-    extraReducers: (builder) => {
-
     }
 });
 export const { login } = loginUserSlice.actions;
