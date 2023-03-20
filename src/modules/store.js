@@ -1,7 +1,5 @@
-import { combineReducers, configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { loginUserSlice } from "./accounts/accountReducers";
-
-// redux-persist ---------------------------------------------------- //
 import { persistReducer } from "redux-persist";
 import storageSession from "redux-persist/lib/storage/session"
 
@@ -9,19 +7,16 @@ const persistConfig = {
     key: "root",
     version: 1,
     storage: storageSession,
-    whitelist: ["LoginUser"]
+    whitelist: ["LoginUser"] // whitelist만 session 사용
 }
 
-
-const rootReducer = combineReducers({
-    LoginUser: loginUserSlice.reducer
-})
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-// redux-persist ---------------------------------------------------- //
+const reducers = persistReducer(persistConfig, combineReducers({
+    LoginUser: loginUserSlice.reducer,
+}));
 
 const store = configureStore({
-    reducer: persistedReducer,
-    middleware: getDefaultMiddleware => getDefaultMiddleware({
+    reducer: reducers,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false
     })
 })
