@@ -1,11 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './css/Login.css'
 import AppLogo from '../../logo.svg'
 import fetchLogin from '../../api/fetchLogin';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import AccountsCode from '../../model/accounts/AccountsCode';
 
 function Login() {
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.LoginUser);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // session 확인
+        switch(user.code) {
+            case AccountsCode.SUCCESS:
+                navigate('/');
+                break;
+            case AccountsCode.BAD_CREDENTIALS:
+                console.log("로그인 실패");
+                break;
+            default: ;
+        }
+
+    }, [user]);
     
     const [inputs, setInputs] = useState({
         email: "",
@@ -21,9 +39,8 @@ function Login() {
 
     const requestLogin = (e) => {
         e.preventDefault();
-        // fetchLogin(inputs);
         dispatch(fetchLogin(inputs));
-
+        
     }
 
     return (
