@@ -1,12 +1,6 @@
-import { login } from '../modules/accounts/accountReducers';
+import { login } from '../model/accounts/accountReducers';
 import axios from './axios';
-
-const Code = {
-    SUCCESS: "CMN-001",
-    BAD_CREDENTIALS: "ATE-004"
-    // ... //
-}
-Object.freeze(Code);
+import AccountsCode from '../model/accounts/AccountsCode';
 
 // Thunk Function
 const fetchLogin = ({ email, password }) => {
@@ -20,11 +14,12 @@ const fetchLogin = ({ email, password }) => {
             }
         }).then(response => {
             switch (response.data.code) {
-                case Code.SUCCESS:
-                    dispatch(login(response.data.data));
+                case AccountsCode.SUCCESS:
+                    dispatch(login(response.data));
                     break;
 
-                case Code.BAD_CREDENTIALS:
+                case AccountsCode.BAD_CREDENTIALS:
+                    dispatch(login(response.data));
                     break;
 
                 default: ;
