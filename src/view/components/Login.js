@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './css/Login.css'
 import AppLogo from '../../logo.svg'
-import fetchLogin from '../../api/fetchLogin';
+import fetchLogin from '../../api/fetchUser';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import AccountsCode from '../../model/accounts/AccountsCode';
