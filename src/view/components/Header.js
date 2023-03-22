@@ -1,12 +1,21 @@
-import AppLogo from '../../logo.svg';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './css/Header.css'
+import AppLogoImg from '../../logo.svg';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import AccountsCode from '../../model/accounts/AccountsCode';
 
 function Header() {
     const [hiddenSearchBar, setHiddenSearchBar] = useState(false);
     const [searchText, setSearchText] = useState("");
+    const location = useLocation();
     const navigate = useNavigate();
+    const loginState = useSelector(state => state.LoginUser.code);
+
+    useEffect(() => {
+        // 현재 페이지 주소 확인 -> 메인 페이지에서만 검색창 노출
+        location.pathname === '/' ? setHiddenSearchBar(false) : setHiddenSearchBar(true);
+    }, [location]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -17,56 +26,124 @@ function Header() {
     }
 
     const movePage = (pageName) => {
-        pageName === '/' ? setHiddenSearchBar(false) : setHiddenSearchBar(true);
         setSearchText("");
         navigate(pageName);
     }
 
     return (
-        // flex mx-96 w-full h-24 justify-between mt-8
-        <div className="Header">
-            <div className="Logo">
-                <img src={AppLogo} alt="app_logo" onClick={() => movePage('/')}/>
-            </div>
-            <div className="MidMenuBar">
-                <form
-                    className={hiddenSearchBar ? "hidden" : "SearchForm"}
-                    onSubmit={handleSubmit}
-                >
-                    <input
-                        className="SearchBar"
+        <Contents>
+            <AppLogoDiv>
+                <img src={AppLogoImg} alt="app_logo_img" onClick={() => movePage('/')} />
+            </AppLogoDiv>
+            <MidMenuBarDiv>
+                <SearchForm hiddenSearchBar={hiddenSearchBar}
+                    onSubmit={handleSubmit}>
+                    <SearchInput
                         type="text"
                         onChange={handleChange}
                         value={searchText}
                     />
-                    <button className="SearchButton">
-                        <img src={AppLogo} />
-                    </button>
-                </form>
-                <div className="MidMenu">
+                    <SearchButton>
+                        <img src={AppLogoImg} />
+                    </SearchButton>
+                </SearchForm>
+                <MidMenuDiv>
                     <button>메뉴1</button>
                     <button>메뉴2</button>
                     <button>메뉴3</button>
                     <button>메뉴4</button>
                     <button>메뉴5</button>
-                </div>
-            </div>
+                </MidMenuDiv>
+            </MidMenuBarDiv>
 
-            <div className="SideMenuBar">
-                <button className="ImageButton" onClick={() => movePage('/login')} >
-                    <img src={AppLogo} alt="login_img" />로그인
-                </button>
-                <button className="ImageButton" onClick={() => movePage('/register')}>
-                    <img src={AppLogo} alt="login_img" />회원가입
-                </button>
-                <button className="ImageButton">
-                    <img src={AppLogo} alt="login_img" />고객센터
-                </button>
-                <button className="ImageButton">
-                    <img src={AppLogo} alt="login_img" />장바구니
-                </button>
-            </div>
-        </div>
+            <SideMenuBarDiv>
+                {loginState === AccountsCode.SUCCESS &&
+                    <ImageButton>
+                        <img src={AppLogoImg} alt="login_img" /> 내정보
+                    </ImageButton> 
+                }
+                {!loginState &&
+                    <ImageButton onClick={() => movePage('/login')} >
+                        <img src={AppLogoImg} alt="login_img" />로그인
+                    </ImageButton>
+                }
+                {!loginState &&
+                    <ImageButton onClick={() => movePage('/register')}>
+                        <img src={AppLogoImg} alt="login_img" />회원가입
+                    </ImageButton>
+                }
+                <ImageButton>
+                    <img src={AppLogoImg} alt="login_img" />고객센터
+                </ImageButton>
+                <ImageButton>
+                    <img src={AppLogoImg} alt="login_img" />장바구니
+                </ImageButton>
+            </SideMenuBarDiv>
+        </Contents>
     );
 }
 export default Header;
+
+const Contents = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    height: 96px;
+    margin-top: 35px;
+    padding: 0 200px;
+`
+
+const AppLogoDiv = styled.div`
+    display: flex;
+    justify-content: left;
+    width: 33%;
+    cursor: pointer;
+`
+const MidMenuBarDiv = styled.div`
+    display: flex;
+    width: 33%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`
+
+const SearchForm = styled.form`
+    display: ${props => props.hiddenSearchBar ? "none" : "flex"};
+    justify-content: right;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+`
+
+const SearchInput = styled.input`
+    width: 100%;
+    height: 100%;
+    border-bottom: 2px solid;
+    border-color: rgba(0, 0, 0, 0.5);
+`
+
+const SearchButton = styled.button`
+    width: 40px;
+    height: fit-content;
+    position: absolute;
+`
+
+const MidMenuDiv = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 50%;
+    margin-top: 10px;
+`
+const SideMenuBarDiv = styled.div`
+    display: flex;
+    width: 33%;
+    justify-content: right;
+    align-items: center;
+    gap: 15px;
+    font-size: 14px;
+`
+
+const ImageButton = styled.button`
+    width: 50px;
+`
