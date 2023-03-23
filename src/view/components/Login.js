@@ -5,12 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import AccountsCode from '../../model/accounts/AccountsCode';
 import styled from 'styled-components';
+import MessageDialog from './MessageDialog';
+import DialogType from '../../model/common/DialogType';
 
 function Login() {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.LoginUser);
     const navigate = useNavigate();
     const [clickedLoginButton, setClickedLoginButton] = useState(false);
+    const [openLoginFailDialog, setOpenLoginFailDialog] = useState(false);
 
     useEffect(() => {
         // session 확인
@@ -20,13 +23,13 @@ function Login() {
                     navigate('/');
                     break;
                 case AccountsCode.BAD_CREDENTIALS:
-                    console.log("로그인 실패");
+                    // 다이얼로그 오픈
+                    setOpenLoginFailDialog(true);
                     break;
                 default: ;
             }
             setClickedLoginButton(false);
         }
-
     }, [user]);
 
     const [inputs, setInputs] = useState({
@@ -51,6 +54,17 @@ function Login() {
 
     return (
         <Contents>
+            {openLoginFailDialog &&
+                <MessageDialog
+                    title={"로그인 실패"}
+                    content={"아이디 또는 비밀번호가 틀렸습니다."}
+                    type={DialogType.CONFIRM}
+                    confirm={() => {
+                        setOpenLoginFailDialog(false);
+                    }}>
+                </MessageDialog>
+            }
+
             <TopButtonDiv>
                 <TopButton>회원 로그인 </TopButton>
                 <TopButton>비회원 주문조회</TopButton>
