@@ -1,4 +1,3 @@
-import style from './css/Notice.module.css';
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper';
@@ -6,10 +5,11 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import styled from 'styled-components';
 
 function Notice({ notice }) {
     return (
-        <Swiper className={style.Notice}
+        <StyledSwiper
             modules={[Navigation, Pagination, Autoplay]}
             navigation
             pagination
@@ -18,21 +18,32 @@ function Notice({ notice }) {
                 delay: 5000,
                 disableOnInteraction: false,
                 pauseOnMouseEnter: true
-            }}
-        >
+            }}>
 
             {notice.map((data) => (
                 <SwiperSlide>
-                    <img
+                    <Img
                         key={data.id}
-                        className={style.ImgFrame}
                         src={`https://image.tmdb.org/t/p/original/${data.imgUrl}`}
-                        alt="notice"
-                    />
+                        alt="notice"/>
                 </SwiperSlide>
             ))}
-        </Swiper>
+        </StyledSwiper>
     )
 }
 
 export default Notice;
+
+const StyledSwiper = styled(Swiper)`
+    display: flex;
+    flex-direction: row;
+    width: 800px;
+    height: 400px;
+    border-radius: 15px;
+    overflow: hidden;
+`
+
+const Img = styled.img`
+    width: inherit;
+    height: inherit;
+`

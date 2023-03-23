@@ -10,9 +10,7 @@ function Register() {
             <KakaoRegisterButton>
                 <p>카카오톡 1초 회원가입</p>
             </KakaoRegisterButton>
-
             <RegisterState />
-
             <TermsDetails text={"쇼핑몰 이용약관"}>
                 <TermsSummary>
                     <label><input type="checkbox"/> 동의합니다.</label>
@@ -97,26 +95,6 @@ const KakaoRegisterButton = styled.button`
     height: 56px;
     background-color: rgba(253 224 71 / 1);
 `
-
-const ProcessDiv = styled.div`
-    display: flex;
-    width: 450px;
-    height: 100px;
-    object-fit: contain;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    font-size: 14px;
-    margin: 60px 0;
-`
-
-const ImageDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 25%;
-`
-
 
 const TermsSummary = styled.summary`
     display: flex;

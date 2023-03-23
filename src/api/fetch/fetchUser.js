@@ -1,6 +1,6 @@
-import { login } from '../model/accounts/accountReducers';
+import { login } from '../../model/accounts/accountReducers';
 import axios from './axios';
-import AccountsCode from '../model/accounts/AccountsCode';
+import AccountsCode from '../../model/accounts/AccountsCode';
 
 // Thunk Function
 const fetchLogin = ({ email, password }) => {

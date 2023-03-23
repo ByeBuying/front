@@ -21,14 +21,14 @@ function Header() {
         e.preventDefault();
     }
 
-    const handleChange = (e) => {
-        setSearchText(e.target.value);
+    const handleChange = (e) => setSearchText(e.target.value);
+
+    const movePage = (pathname) => {
+        setSearchText("");
+        navigate(pathname);
     }
 
-    const movePage = (pageName) => {
-        setSearchText("");
-        navigate(pageName);
-    }
+    const isLogin = (loginState) => loginState === AccountsCode.SUCCESS;
 
     return (
         <Contents>
@@ -57,26 +57,26 @@ function Header() {
             </MidMenuBarDiv>
 
             <SideMenuBarDiv>
-                {loginState === AccountsCode.SUCCESS &&
+                {isLogin(loginState) &&
                     <ImageButton>
-                        <img src={AppLogoImg} alt="login_img" /> 내정보
+                        <SideMenuImg src={AppLogoImg} alt="login_img" /> 마이페이지
                     </ImageButton> 
                 }
-                {!loginState &&
+                {!isLogin(loginState) &&
                     <ImageButton onClick={() => movePage('/login')} >
-                        <img src={AppLogoImg} alt="login_img" />로그인
+                        <SideMenuImg src={AppLogoImg} alt="login_img" />로그인
                     </ImageButton>
                 }
-                {!loginState &&
+                {!isLogin(loginState) &&
                     <ImageButton onClick={() => movePage('/register')}>
-                        <img src={AppLogoImg} alt="login_img" />회원가입
+                        <SideMenuImg src={AppLogoImg} alt="login_img" />회원가입
                     </ImageButton>
                 }
                 <ImageButton>
-                    <img src={AppLogoImg} alt="login_img" />고객센터
+                    <SideMenuImg src={AppLogoImg} alt="login_img" />고객센터
                 </ImageButton>
                 <ImageButton>
-                    <img src={AppLogoImg} alt="login_img" />장바구니
+                    <SideMenuImg src={AppLogoImg} alt="login_img" />장바구니
                 </ImageButton>
             </SideMenuBarDiv>
         </Contents>
@@ -140,10 +140,17 @@ const SideMenuBarDiv = styled.div`
     width: 33%;
     justify-content: right;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     font-size: 14px;
 `
 
 const ImageButton = styled.button`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70px;
+`
+
+const SideMenuImg = styled.img`
     width: 50px;
 `

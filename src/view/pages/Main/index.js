@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import fetchNotice from '../../../api/fetchNotice';
+import fetchNotice from '../../../api/fetch/fetchNotice';
 import ImgEvent from '../../components/ImgEvent';
 import Notice from '../../components/Notice';
 import ProductRanking from '../../components/ProductRanking';
