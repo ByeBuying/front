@@ -1,30 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import './css/Login.css'
 import AppLogo from '../../logo.svg'
-import fetchLogin from '../../api/fetchUser';
+import fetchLogin from '../../api/fetch/fetchUser';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AccountsCode from '../../model/accounts/AccountsCode';
+import styled from 'styled-components';
 
 function Login() {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.LoginUser);
     const navigate = useNavigate();
+    const [clickedLoginButton, setClickedLoginButton] = useState(false);
 
     useEffect(() => {
         // session 확인
-        switch(user.code) {
-            case AccountsCode.SUCCESS:
-                navigate('/');
-                break;
-            case AccountsCode.BAD_CREDENTIALS:
-                console.log("로그인 실패");
-                break;
-            default: ;
+        if (clickedLoginButton) {
+            switch (user.code) {
+                case AccountsCode.SUCCESS:
+                    navigate('/');
+                    break;
+                case AccountsCode.BAD_CREDENTIALS:
+                    console.log("로그인 실패");
+                    break;
+                default: ;
+            }
+            setClickedLoginButton(false);
         }
 
     }, [user]);
-    
+
     const [inputs, setInputs] = useState({
         email: "",
         password: ""
@@ -39,46 +43,46 @@ function Login() {
 
     const requestLogin = (e) => {
         e.preventDefault();
+        setClickedLoginButton(true);
         dispatch(fetchLogin(inputs));
-        
     }
 
+    const movePage = (pathname) => navigate(pathname);
+
     return (
-        <div className="Login">
-            <div className="TopButtonDiv">
-                <button className="Member" >회원 로그인 </button>
-                <button className="NonMember" >비회원 주문조회</button>
-            </div>
-            <form className="LoginForm" onSubmit={requestLogin}>
-                <input
+        <Contents>
+            <TopButtonDiv>
+                <TopButton>회원 로그인 </TopButton>
+                <TopButton>비회원 주문조회</TopButton>
+            </TopButtonDiv>
+            <LoginForm onSubmit={requestLogin}>
+                <Input
                     name="email"
-                    className="Id"
                     type="email"
                     placeholder='이메일'
                     onChange={handleChange}
                 />
-                <input
+                <Input
                     name="password"
-                    className="Password"
                     type="password"
                     placeholder='비밀번호'
                     onChange={handleChange}
                 />
-                <div className="Div">
+                <SaveAndFindDiv>
                     <div>
                         <input
-                            className="SaveIdCheckbox"
+                            className="mr-[1px]"
                             id="checkbox"
                             type="checkbox" />
-                        <label htmlFor="checkbox">아이디 저장</label>
+                        <label htmlFor="checkbox"> 아이디 저장</label>
                     </div>
                     <button type="button">아이디/비밀번호 찾기</button>
-                </div>
-                <button className="LoginButton" type="submit">로그인</button>
-                <button className="RegisterButton" type="button">회원가입</button>
-            </form>
-            <div className="SimpleLoginDiv"> 간편 로그인
-                <div className="LoginApiButtons">
+                </SaveAndFindDiv>
+                <LoginButton type="submit">로그인</LoginButton>
+                <RegisterButtonLink type="button" onClick={() => movePage('/register')}>회원가입</RegisterButtonLink>
+            </LoginForm>
+            <SimpleLoginDiv> 간편 로그인
+                <LoginApiButtonsDiv>
                     <button className="w-14">
                         <img src={AppLogo} />
                     </button>
@@ -88,9 +92,73 @@ function Login() {
                     <button className="w-14">
                         <img src={AppLogo} />
                     </button>
-                </div>
-            </div>
-        </div>
+                </LoginApiButtonsDiv>
+            </SimpleLoginDiv>
+        </Contents>
     );
 }
 export default Login;
+
+const Contents = styled.div`
+    margin: 140px 0;
+`
+
+const TopButtonDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    height: 80px;
+`
+
+const TopButton = styled.button`
+    width: 160px;
+    border-width: 1px;
+`
+
+const LoginForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 60px 0;
+`
+
+const Input = styled.input`
+    width: 320px;
+    height: 64px;
+    border-bottom-width: 1px;
+    border-color: rgba(243 244 246 / 1);
+`
+
+const SaveAndFindDiv = styled.div`
+    display: flex;
+    width: 320px;
+    justify-content: space-between;
+    margin: 20px 0;
+`
+
+const LoginButton = styled.button`
+    width: 320px;
+    height: 56px;
+    color: rgba(255 255 255 / 1);
+    background-color: #5223CB;
+    margin-bottom: 5px;
+`
+
+const RegisterButtonLink = styled.button`
+    width: 320px;
+    height: 56px;
+    color: #5223CB;
+    border-width: 1px;
+`
+
+const SimpleLoginDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+`
+
+const LoginApiButtonsDiv = styled.div`
+    display: flex;
+    gap: 20px;
+`

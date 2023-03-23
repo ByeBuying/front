@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import fetchAccountsNormal from '../../../api/fetchAccountsNormal';
+import fetchAccountsNormal from '../../../api/fetch/fetchAccountsNormal';
 import RegisterState from './RegisterState';
 
 function RegisterForm() {
