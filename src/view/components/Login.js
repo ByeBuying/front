@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import AppLogo from '../../logo.svg'
-import fetchLogin from '../../api/fetch/fetchUser';
+import fetchLogin from '../../api/fetch/fetchLogin';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import AccountsCode from '../../model/accounts/AccountsCode';
+import { useNavigate } from 'react-router-dom';
+import AccountsCode from '../../model/accounts/code/AccountsCode';
 import styled from 'styled-components';
 import MessageDialog from './MessageDialog';
 import DialogType from '../../model/common/DialogType';
@@ -16,7 +16,6 @@ function Login() {
     const [openLoginFailDialog, setOpenLoginFailDialog] = useState(false);
 
     useEffect(() => {
-        // session 확인
         if (clickedLoginButton) {
             switch (user.code) {
                 case AccountsCode.SUCCESS:

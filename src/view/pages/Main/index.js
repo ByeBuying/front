@@ -43,10 +43,6 @@ const Contents = styled.div`
     flex-direction: column;
     align-items: center;
     margin: 100px;
-
-    @media screen and (max-width: 1080px) {
-        margin: 80px;
-    }
 `
 
 const StyledHeaderText = styled.h2`
