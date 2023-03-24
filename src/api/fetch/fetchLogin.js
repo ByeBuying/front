@@ -1,10 +1,10 @@
 import { login } from '../../model/accounts/accountReducers';
-import axios from './axios';
-import AccountsCode from '../../model/accounts/AccountsCode';
+import axios from './lib/axios';
+import AccountsCode from '../../model/accounts/code/AccountsCode';
 
 // Thunk Function
 const fetchLogin = ({ email, password }) => {
-    return async (dispatch, getState) => {
+    return async dispatch => {
         await axios.post('/login', {
             "email": email,
             "password": password
@@ -15,6 +15,7 @@ const fetchLogin = ({ email, password }) => {
         }).then(response => {
             switch (response.data.code) {
                 case AccountsCode.SUCCESS:
+                    console.log("test:", response);
                     dispatch(login(response.data));
                     break;
 

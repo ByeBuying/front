@@ -1,4 +1,4 @@
-import axios from './axios';
+import axios from './lib/axios';
 
 async function fetchAccountsNormal({ email, name, password, birthDay }) {
     await axios.post('/v1/auth/accounts/normal', {

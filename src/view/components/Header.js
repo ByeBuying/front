@@ -3,19 +3,17 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import AccountsCode from '../../model/accounts/AccountsCode';
+import AccountsCode from '../../model/accounts/code/AccountsCode';
 
 function Header() {
-    const [hiddenSearchBar, setHiddenSearchBar] = useState(false);
     const [searchText, setSearchText] = useState("");
     const location = useLocation();
     const navigate = useNavigate();
     const loginState = useSelector(state => state.LoginUser.code);
 
     useEffect(() => {
-        // 현재 페이지 주소 확인 -> 메인 페이지에서만 검색창 노출
-        location.pathname === '/' ? setHiddenSearchBar(false) : setHiddenSearchBar(true);
-    }, [location]);
+
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -36,8 +34,7 @@ function Header() {
                 <img src={AppLogoImg} alt="app_logo_img" onClick={() => movePage('/')} />
             </AppLogoDiv>
             <MidMenuBarDiv>
-                <SearchForm hiddenSearchBar={hiddenSearchBar}
-                    onSubmit={handleSubmit}>
+                <SearchForm onSubmit={handleSubmit}>
                     <SearchInput
                         type="text"
                         onChange={handleChange}
@@ -58,7 +55,7 @@ function Header() {
 
             <SideMenuBarDiv>
                 {isLogin(loginState) &&
-                    <ImageButton>
+                    <ImageButton onClick={() => movePage('/myPage')} >
                         <SideMenuImg src={AppLogoImg} alt="login_img" /> 마이페이지
                     </ImageButton> 
                 }
@@ -108,7 +105,7 @@ const MidMenuBarDiv = styled.div`
 `
 
 const SearchForm = styled.form`
-    display: ${props => props.hiddenSearchBar ? "none" : "flex"};
+    display: flex;
     justify-content: right;
     align-items: center;
     width: 100%;

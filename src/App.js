@@ -7,6 +7,7 @@ import Header from './view/components/Header';
 import Footer from './view/components/Footer';
 import TextEvent from './view/components/TextEvent';
 import RegisterForm from './view/components/register/RegisterForm';
+import MyPage from './view/pages/MyPage';
 
 function Layout() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<RegisterTerms />} />
           <Route path="/registerForm" element={<RegisterForm />} />
+          <Route path="/myPage" element={<MyPage />} />
         </Route>
       </Routes>
 
