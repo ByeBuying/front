@@ -10,14 +10,14 @@ import DialogType from '../../model/common/DialogType';
 
 function Login() {
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.LoginUser);
+    const loginUser = useSelector((state) => state.LoginUser);
     const navigate = useNavigate();
     const [clickedLoginButton, setClickedLoginButton] = useState(false);
     const [openLoginFailDialog, setOpenLoginFailDialog] = useState(false);
 
     useEffect(() => {
         if (clickedLoginButton) {
-            switch (user.code) {
+            switch (loginUser.code) {
                 case AccountsCode.SUCCESS:
                     navigate('/');
                     break;
@@ -29,7 +29,7 @@ function Login() {
             }
             setClickedLoginButton(false);
         }
-    }, [user]);
+    }, [loginUser]);
 
     const [inputs, setInputs] = useState({
         email: "",

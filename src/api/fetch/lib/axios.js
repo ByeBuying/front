@@ -1,7 +1,8 @@
 import axios from 'axios';
+import fetchUrl from './fetchUrl';
 
 const instance = axios.create({
-    baseURL: "/api",
+    baseURL: fetchUrl.base,
     headers: {
         
     }

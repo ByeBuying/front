@@ -3,7 +3,8 @@ import React from 'react'
 import DialogType from "../../model/common/DialogType";
 
 /**
- * 임주형 / 2023-03-23
+ * History
+ ** 2023-03-23: 임주형 - 최초생성
  * @callback callbackConfirm
  * @callback callbackCancel
  * @param {string} title 제목
