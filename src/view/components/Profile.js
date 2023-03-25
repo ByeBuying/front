@@ -1,7 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import AccountsCode from '../../model/accounts/code/AccountsCode';
+
 
 function Profile() {
+    const myInformation = useSelector(state => state.MyInformation.data);
+    const grade = myInformation !== null ? myInformation.grade : "";
+    const name = myInformation !== null ? myInformation.name : "";
+    const email = myInformation !== null ? myInformation.email : "";
+
     const getColorCode = (memberLevel) => {
         switch (memberLevel) {
             case "LV1":
@@ -21,18 +29,17 @@ function Profile() {
 
     return (
         <Contents>
-            <MemberLevelDiv colorCode={getColorCode("LV1")}>
-                <MemberLevelSpan>{"LV1"}</MemberLevelSpan>
+            <MemberLevelDiv colorCode={getColorCode(grade)}>
+                <MemberLevelSpan>{grade}</MemberLevelSpan>
             </MemberLevelDiv>
             <UserInfoDiv>
-                <UserNameP>{"임주형"}</UserNameP>
-                <UserEmailP>{"abc123@gmail.com"}</UserEmailP>
-                <RegisterDate>가입일: {"2023.03.23"}</RegisterDate>
+                <UserNameP>{name}</UserNameP>
+                <UserEmailP>{email}</UserEmailP>
+                <RegisterDateP>가입일: {"(TEST)2023.03.23"}</RegisterDateP>
             </UserInfoDiv>
         </Contents>
     )
 }
-
 export default Profile;
 
 const Contents = styled.div`
@@ -58,6 +65,7 @@ const MemberLevelSpan = styled.span`
 
 const UserInfoDiv = styled.div`
     position: relative;
+    width: 300px;
 `
 
 const UserNameP = styled.p`
@@ -70,7 +78,7 @@ const UserEmailP = styled.p`
     font-weight: 200;
 `
 
-const RegisterDate = styled.p`
+const RegisterDateP = styled.p`
     position: absolute;
     bottom: 0;
     margin-bottom: 10px;

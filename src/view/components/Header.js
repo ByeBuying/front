@@ -1,19 +1,27 @@
 import AppLogoImg from '../../logo.svg';
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import AccountsCode from '../../model/accounts/code/AccountsCode';
 
 function Header() {
     const [searchText, setSearchText] = useState("");
-    const location = useLocation();
     const navigate = useNavigate();
+
     const loginState = useSelector(state => state.LoginUser.code);
+    const isLogin = (loginState) => loginState === AccountsCode.SUCCESS;
+
+    // -- TEST --
+    const loginUser = useSelector(state => state.LoginUser);
+    const myInformation = useSelector(state => state.MyInformation);
+    // ----------
 
     useEffect(() => {
+        console.log("loginUser:", loginUser);
+        console.log("myInformation:", myInformation);
 
-    }, []);
+    }, [loginState]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -25,8 +33,6 @@ function Header() {
         setSearchText("");
         navigate(pathname);
     }
-
-    const isLogin = (loginState) => loginState === AccountsCode.SUCCESS;
 
     return (
         <Contents>
@@ -57,7 +63,7 @@ function Header() {
                 {isLogin(loginState) &&
                     <ImageButton onClick={() => movePage('/myPage')} >
                         <SideMenuImg src={AppLogoImg} alt="login_img" /> 마이페이지
-                    </ImageButton> 
+                    </ImageButton>
                 }
                 {!isLogin(loginState) &&
                     <ImageButton onClick={() => movePage('/login')} >
