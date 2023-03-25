@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import fetchNotice from '../../api/fetchNotice';
+import styled from 'styled-components';
+import fetchNotice from '../../../api/fetch/fetchNotice';
 import ImgEvent from '../../components/ImgEvent';
 import Notice from '../../components/Notice';
 import ProductRanking from '../../components/ProductRanking';
 import Products from '../../components/Products';
-import './index.css';
 
 function Main() {
     const [notice, setNotice] = useState([]);
@@ -15,7 +15,7 @@ function Main() {
     useEffect(() => {
         // Fetch Datas
         fetchNotice().then(data => {
-            setNotice(data)
+            setNotice(data);
             setPopularItems(data);
             setNewItems(data);
             setRankingItems(data);
@@ -23,17 +23,30 @@ function Main() {
     }, []);
 
     return (
-        <div className="Main">
+        <Contents>
             <Notice notice={notice}/>
-            <h2 className="mt-20 mb-10 font-semibold">인기 상품</h2>
+            <StyledHeaderText>인기 상품</StyledHeaderText>
             <Products products={popularItems}/>
-            <h2 className="mt-20 mb-10 font-semibold">신상품</h2>
+            <StyledHeaderText>신상품</StyledHeaderText>
             <Products products={newItems}/>
-            <h2 className="mt-20 mb-10"></h2>
+            <StyledHeaderText></StyledHeaderText>
             <ProductRanking products={rankingItems}/>
-            <h2 className="mt-20 mb-10"></h2>
+            <StyledHeaderText></StyledHeaderText>
             <ImgEvent />
-        </div>
+        </Contents>
     );
 }
 export default Main;
+
+const Contents = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 100px;
+`
+
+const StyledHeaderText = styled.h2`
+    margin-top: 80px;
+    margin-bottom: 40px;
+    font-weight: 600;
+`
