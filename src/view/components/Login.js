@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import AccountsCode from '../../model/accounts/code/AccountsCode';
 import styled from 'styled-components';
-import MessageDialog from './MessageDialog';
+import MessageDialog from './modal/MessageDialog';
 import DialogType from '../../model/common/DialogType';
 
 function Login() {
@@ -57,7 +57,7 @@ function Login() {
                 <MessageDialog
                     title={"로그인 실패"}
                     content={"아이디 또는 비밀번호가 틀렸습니다."}
-                    type={DialogType.CONFIRM_AND_CANCEL}
+                    type={DialogType.CONFIRM}
                     confirm={() => {
                         setOpenLoginFailDialog(false);
                     }}>
