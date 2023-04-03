@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import AccountsCode from '../../model/accounts/code/AccountsCode';
+import { getMemberGradeColorCode } from '../../api/common/colorCode';
 
 
 function Profile() {
@@ -10,26 +10,9 @@ function Profile() {
     const name = myInformation !== null ? myInformation.name : "";
     const email = myInformation !== null ? myInformation.email : "";
 
-    const getColorCode = (memberLevel) => {
-        switch (memberLevel) {
-            case "LV1":
-                return "#C89850";
-            case "LV2":
-                return "#888888";
-            case "LV3":
-                return "#EBB700";
-            case "LV4":
-                return "#2FEED7";
-            case "LV5":
-                return "#FF0000";
-            default:
-                return "#000000";
-        }
-    }
-
     return (
         <Contents>
-            <MemberLevelDiv colorCode={getColorCode(grade)}>
+            <MemberLevelDiv colorCode={getMemberGradeColorCode(grade)}>
                 <MemberLevelSpan>{grade}</MemberLevelSpan>
             </MemberLevelDiv>
             <UserInfoDiv>
