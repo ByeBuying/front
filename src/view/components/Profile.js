@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { getMemberGradeColorCode } from '../../api/common/colorCode';
+import MemberGradeBadge from './MemberGradeBadge';
 
 
 function Profile() {
@@ -12,9 +13,7 @@ function Profile() {
 
     return (
         <Contents>
-            <MemberLevelDiv colorCode={getMemberGradeColorCode(grade)}>
-                <MemberLevelSpan>{grade}</MemberLevelSpan>
-            </MemberLevelDiv>
+            <MemberGradeBadge grade={grade} />
             <UserInfoDiv>
                 <UserNameP>{name}</UserNameP>
                 <UserEmailP>{email}</UserEmailP>
@@ -28,22 +27,6 @@ export default Profile;
 const Contents = styled.div`
     display: flex;
     gap: 55px;
-`
-
-const MemberLevelDiv = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    border-width: 4px;
-    border-color: ${props => props.colorCode};
-`
-
-const MemberLevelSpan = styled.span`
-    font-size: 1.35rem;
-    font-weight: 400;
 `
 
 const UserInfoDiv = styled.div`
