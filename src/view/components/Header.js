@@ -140,6 +140,6 @@ const ImageButton = styled.button`
 `
 
 const SideMenuImg = styled.img`
-    width: 25px;
-    margin-bottom: 4px;
+    width: 22px;
+    margin-bottom: 5px;
 `

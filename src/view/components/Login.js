@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import AccountsCode from '../../model/accounts/code/AccountsCode';
 import styled from 'styled-components';
-import MessageDialog from './MessageDialog';
+import MessageDialog from './modal/MessageDialog';
 import DialogType from '../../model/common/DialogType';
 
 function Login() {
