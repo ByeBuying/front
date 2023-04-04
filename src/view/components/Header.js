@@ -5,23 +5,36 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import AccountsCode from '../../model/accounts/code/AccountsCode';
 import { assets } from '../../model/lib/assets';
+import MyPageModal from './modal/MyPageModal';
 
 function Header() {
     const [searchText, setSearchText] = useState("");
+    const [showMyPageModal, setShowMyPageModal] = useState(false);
+    const [myPageBtnHeight, setMyPageBtnHeight] = useState(0);
     const navigate = useNavigate();
 
     const loginState = useSelector(state => state.LoginUser.code);
     const isLogin = (loginState) => loginState === AccountsCode.SUCCESS;
 
+    // 검색창
     const handleSubmit = (e) => {
         e.preventDefault();
     }
-
     const handleChange = (e) => setSearchText(e.target.value);
 
     const movePage = (pathname) => {
         setSearchText("");
         navigate(pathname);
+    }
+
+    const handleMyPageBtnMouseEnter = (e) => {
+        const target = e.currentTarget;
+        setMyPageBtnHeight(target.offsetHeight);
+        setShowMyPageModal(true);
+    }
+
+    const handleMyPageBtnMouseLeave = () => {
+        setShowMyPageModal(false);
     }
 
     return (
@@ -37,7 +50,7 @@ function Header() {
                         value={searchText}
                     />
                     <SearchButton>
-                        <img src={assets.searchIcon} alt="search_icon"/>
+                        <img src={assets.searchIcon} alt="search_icon" />
                     </SearchButton>
                 </SearchForm>
                 <MidMenuDiv>
@@ -51,10 +64,18 @@ function Header() {
 
             <SideMenuBarDiv>
                 {isLogin(loginState) &&
-                    <ImageButton onClick={() => movePage('/myPage')} >
-                        <SideMenuImg src={assets.myinfoIcon} alt="myinfo_icon" /> 마이페이지
-                    </ImageButton>
+                    <div className='relative'
+                        onMouseEnter={handleMyPageBtnMouseEnter}
+                        onMouseLeave={handleMyPageBtnMouseLeave}
+                    >
+                        <ImageButton onClick={() => movePage('/myPage')}>
+                            <SideMenuImg src={assets.myinfoIcon} alt="myinfo_icon" /> 마이페이지
+                        </ImageButton>
+                        {/* 마이페이지 모달 */}
+                        {showMyPageModal && (<MyPageModal parentHeight={myPageBtnHeight} />)}
+                    </div>
                 }
+
                 {!isLogin(loginState) &&
                     <ImageButton onClick={() => movePage('/login')} >
                         <SideMenuImg src={assets.loginIcon} alt="login_icon" />로그인
@@ -63,6 +84,7 @@ function Header() {
                 <ImageButton>
                     <SideMenuImg src={assets.customerServiceIcon} alt="customer_service_icon" />고객센터
                 </ImageButton>
+
                 <ImageButton>
                     <SideMenuImg src={assets.cartIcon} alt="cart_icon" />장바구니
                 </ImageButton>

@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components';
 
-function MyPageModal() {
+function MyPageModal({ parentHeight }) {
     return (
-        <Contents>
+        <Contents parentHeight={parentHeight}>
             <TopContentsDiv>
 
             </TopContentsDiv>
@@ -20,7 +20,13 @@ function MyPageModal() {
 export default MyPageModal;
 
 const Contents = styled.div`
-
+    position: absolute;
+    top: ${props => props.parentHeight} + 'px';
+    left: 0;
+    z-index: 1000;
+    width: 300px;
+    height: 600px;
+    background: black;
 `
 
 const TopContentsDiv = styled.div`
