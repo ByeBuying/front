@@ -23,7 +23,7 @@ function MessageDialog({ title, content, type, confirm, cancel }) {
                 <ContentP>{content}</ContentP>
                 <ButtonDiv>
                     <ConfirmButton onClick={(e) => confirm(e)}>확인</ConfirmButton>
-                    {type === DialogType.CONFIRM_AND_CANCEL && <CancelButton onClick={(e) => cancel(e)}>취소</CancelButton>}
+                    {type === DialogType.CONFIRM && <CancelButton onClick={(e) => cancel(e)}>취소</CancelButton>}
                 </ButtonDiv>
             </MessageBoxDiv>
         </Contents>
