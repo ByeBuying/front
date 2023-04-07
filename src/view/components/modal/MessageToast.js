@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled, { keyframes } from 'styled-components';
+import { messageToastSlice } from '../../../model/common/messageToast/reducer/messageToastReducers';
+import { useDispatch } from 'react-redux';
 
 /**
  ** History
@@ -7,45 +9,66 @@ import styled, { keyframes } from 'styled-components';
  * @param {string} message 내용
  */
 function MessageToast({ message }) {
-    const [closeToast, setCloseToast] = useState(slideUp);
-    
+    const [animation, setAnimation] = useState(slideUp);
+    const [isSlideDownAnimEnd, setIsSlideDownAnimEnd] = useState(false);
+    const dispatch = useDispatch();
+
     useEffect(() => {
         setTimeout(() => {
-            console.log("closetoast");
-            setCloseToast(slideDown);
+            setAnimation(slideDown);
+            setIsSlideDownAnimEnd(true);
         }, 3000);
     }, []);
 
     return (
-        <Contents closeToast={closeToast}>
-            <MessageSpan>message</MessageSpan>
+        <Contents
+            animation={animation}
+            onAnimationEnd={() => {
+                if (isSlideDownAnimEnd) dispatch(messageToastSlice.actions.close());
+            }}
+        >
+            <MessageSpan>{message}</MessageSpan>
         </Contents>
     );
 }
 export default MessageToast;
 
 const slideUp = keyframes`
-    from { transform: translateY(100%); }
-    to { transform: translateY(0%); }
+    from { 
+        opacity: 0;
+        transform: translateY(100%); 
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0%); 
+    }
 `;
 
 const slideDown = keyframes`
-    from { transform: translateY(0%) }
-    to { transform: translateY(100%) }
+    from {
+        opacity: 1; 
+        transform: translateY(0%) 
+    }
+    to {
+        opacity: 0;
+        transform: translateY(100%) 
+    }
 `
 
 const Contents = styled.div`
-    position: absolute;
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
-    bottom: 100px;
-    left: 50%;
+    bottom: 80px;
     z-index: 1000;
-    width: 100px;
-    height: 50px;
+    width: 200px;
+    height: 40px;
+    border-radius: 12px;
+    font-size: small;
     background-color: #5223CB;
-    animation: ${props => props.closeToast} 1s forwards;
+    animation: ${props => props.animation} 1s forwards;
+    box-shadow: 1px 3px 4px rgba(0 0 0 / 0.5);
 `
 
 const MessageSpan = styled.span`

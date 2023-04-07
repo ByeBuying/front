@@ -5,9 +5,13 @@ import RegisterState from './RegisterState';
 import AccountsCode from "../../../model/accounts/code/AccountsCode"
 import MessageDialog from '../modal/MessageDialog';
 import DialogType from '../../../model/common/messageDialog/code/DialogType';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { messageToastSlice } from '../../../model/common/messageToast/reducer/messageToastReducers';
+import { useNavigate } from 'react-router-dom';
 
 function RegisterForm() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         email: "",
         name: "",
@@ -29,6 +33,10 @@ function RegisterForm() {
         fetchAccountsNormal(inputs).then(response => {
             if(response.data.code === AccountsCode.ALREADY_EXIST_ACCOUNT) {
                 setOpenMessageDialog(true);
+            }
+            else if(response.data.code === AccountsCode.SUCCESS) {
+                dispatch(messageToastSlice.actions.show("회원가입 성공!"));
+                navigate('/');
             }
         });
     }

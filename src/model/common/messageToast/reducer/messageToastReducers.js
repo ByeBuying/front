@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import MessageToastState from '../code/MessageToastState';
 
 /**
  * Histoty
@@ -6,11 +7,15 @@ import { createSlice } from '@reduxjs/toolkit';
  */
 export const messageToastSlice = createSlice({
     name: 'messageToast',
-    initialState: { message: "", reqCnt: 0 },
+    initialState: { message: "", code: MessageToastState.CLOSE },
     reducers: {
         show: (state, action) => {
             state.message = action.payload;
-            state.reqCnt += 1;
+            state.code = MessageToastState.SHOW;
+        },
+        close: (state, action) => {
+            state.message = "";
+            state.code = MessageToastState.CLOSE;
         }
     }
 });
