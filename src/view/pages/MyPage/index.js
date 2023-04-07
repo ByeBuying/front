@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import fetchMyInformation from '../../../api/fetch/fetchMyInformation';
 import Profile from '../../components/Profile';
 import AccountsCode from '../../../model/accounts/code/AccountsCode';
-import { loginUserSlice, myInformationSlice } from '../../../model/accounts/accountReducers';
+import { loginUserSlice, myInformationSlice } from '../../../model/accounts/reducers/accountReducers';
 import { useNavigate } from 'react-router-dom';
 
 function MyPage() {
