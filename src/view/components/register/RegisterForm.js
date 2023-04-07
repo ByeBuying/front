@@ -5,7 +5,6 @@ import RegisterState from './RegisterState';
 import AccountsCode from "../../../model/accounts/code/AccountsCode"
 import MessageDialog from '../modal/MessageDialog';
 import DialogType from '../../../model/common/DialogType';
-import { useSelector } from 'react-redux';
 
 function RegisterForm() {
     const [inputs, setInputs] = useState({
