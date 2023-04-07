@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import AccountsCode from '../../model/accounts/code/AccountsCode';
 import styled from 'styled-components';
 import MessageDialog from './modal/MessageDialog';
-import DialogType from '../../model/common/DialogType';
+import DialogType from '../../model/common/messageDialog/code/DialogType';
 
 function Login() {
     const dispatch = useDispatch();

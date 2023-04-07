@@ -6,7 +6,7 @@ import axios from './lib/axios';
  */
 
 async function fetchAccountsNormal({ email, name, password, birthDay }) {
-    await axios.post('/v1/auth/accounts/normal', {
+    return await axios.post('/v1/auth/accounts/normal', {
         "email": email,
         "name": name,
         "password": password,
@@ -15,15 +15,6 @@ async function fetchAccountsNormal({ email, name, password, birthDay }) {
         headers: {
             "Content-Type": "application/json"
         }
-
-    }).then(response => {
-        console.log("success");
-        console.log(response);
-
-    }).catch(error => {
-        console.log(error);
-        debugger;
-
     });
 }
 export default fetchAccountsNormal;
