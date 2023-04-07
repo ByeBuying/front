@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import { getMemberGradeColorCode } from '../../api/common/getColorCode';
+import { getMemberGradeColorCode } from '../../module/ColorCode';
 
 function MemberGradeBadge({ grade }) {
     return (

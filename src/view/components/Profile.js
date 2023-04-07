@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { getMemberGradeColorCode } from '../../api/common/getColorCode';
+import { getMemberGradeColorCode } from '../../module/ColorCode';
 import MemberGradeBadge from './MemberGradeBadge';
 
 
