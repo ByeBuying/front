@@ -1,14 +1,6 @@
 import axios from 'axios';
 
-/**
- * 신상, 홍보 브랜드, 이벤트 등
- * response
- * id - key
- * imgUrl - 이미지 표시
- * pageUrl - 클릭 시 페이지 이동
- * ?
- */
-
+// TODO: 실제 공지 데이터 호출 API로 구현 필요
 async function fetchNotice() {
     // Mock
     const axiosInstance = axios.create({

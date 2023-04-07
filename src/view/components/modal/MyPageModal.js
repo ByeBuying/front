@@ -1,6 +1,13 @@
 import React from 'react'
 import styled from 'styled-components';
 
+/**
+ * History
+ ** 2023-04-04: 임주형 - 최초생성
+ * @param {number} parentHeight 부모엘리먼트 높이
+ * @returns {MyPageModal} Component
+ */
+
 function MyPageModal({ parentHeight }) {
     return (
         <Contents parentHeight={parentHeight}>

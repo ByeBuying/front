@@ -1,7 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import AccountsCode from "./code/AccountsCode";
-import LoginUser from "./object/LoginUser";
-import MyInformation from "./object/MyInformation";
+import AccountsCode from "../code/AccountsCode";
+import LoginUser from "../object/LoginUser";
+import MyInformation from "../object/MyInformation";
+
+/**
+ * History
+ ** 2023-03-20: 임주형 - 로그인API 호출결과 저장(loginUserSlice)
+ ** 2023-03-24: 임주형 - 내정보API 호출결과 저장(myInformationSlice)
+ */
 
 export const loginUserSlice = createSlice({
     name: 'accounts',
