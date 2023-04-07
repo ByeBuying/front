@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import fetchAccountsNormal from '../../../api/fetch/fetchAccountsNormal';
 import RegisterState from './RegisterState';
+import AccountsCode from "../../../model/accounts/code/AccountsCode"
+import MessageDialog from '../modal/MessageDialog';
+import DialogType from '../../../model/common/DialogType';
+import { useDispatch, useSelector } from 'react-redux';
 
 function RegisterForm() {
+    const dispatch = useDispatch();
     const [inputs, setInputs] = useState({
         email: "",
         name: "",
@@ -11,11 +16,15 @@ function RegisterForm() {
         birthDay: ""
     });
 
+    const [openMessageDialog, setOpenMessageDialog] = useState(false);
+    const registerCode = useSelector(state => state.MyInformation.code);
+    console.log("registerCode",registerCode);
+
     const handleChange = (e) => {
         setInputs({
             ...inputs,
             [e.target.name]: e.target.value
-        })
+        });
     }
 
     const requestAccountsNormal = (e) => {
@@ -25,6 +34,14 @@ function RegisterForm() {
 
     return (
         <Contents>
+            { openMessageDialog && (
+                <MessageDialog 
+                    title={"회원가입 실패"}
+                    content={"이미 존재하는 계정입니다."}
+                    type={DialogType.CONFIRM}
+                    confirm={() => setOpenMessageDialog(false)}
+                />
+            )}
             <RegisterState />
             <StyledForm>
                 <InputDiv>

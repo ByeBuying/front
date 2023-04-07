@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { loginUserSlice, myInformationSlice } from "../accounts/accountReducers";
+import { loginUserSlice, myInformationSlice } from "../accounts/reducers/accountReducers";
 import { persistReducer } from "redux-persist";
 import storageSession from "redux-persist/lib/storage/session"
 
