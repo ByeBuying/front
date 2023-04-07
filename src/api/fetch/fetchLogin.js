@@ -1,4 +1,4 @@
-import { loginUserSlice } from '../../model/accounts/reducers/accountReducers';
+import { loginUserSlice } from '../../model/accounts/reducer/accountReducers';
 import axios from './lib/axios';
 import fetchUrl from './lib/fetchUrl';
 

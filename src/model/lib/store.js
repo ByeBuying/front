@@ -1,7 +1,8 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { loginUserSlice, myInformationSlice } from "../accounts/reducers/accountReducers";
+import { loginUserSlice, myInformationSlice } from "../accounts/reducer/accountReducers";
 import { persistReducer } from "redux-persist";
 import storageSession from "redux-persist/lib/storage/session"
+import { messageToastSlice } from "../common/messageToast/reducer/messageToastReducers";
 
 const persistConfig = {
     key: "root",
@@ -13,6 +14,7 @@ const persistConfig = {
 const reducers = persistReducer(persistConfig, combineReducers({
     LoginUser: loginUserSlice.reducer,
     MyInformation: myInformationSlice.reducer,
+    MessageToast: messageToastSlice.reducer,
 }));
 
 const store = configureStore({

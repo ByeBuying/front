@@ -1,4 +1,4 @@
-import { myInformationSlice } from '../../model/accounts/reducers/accountReducers';
+import { myInformationSlice } from '../../model/accounts/reducer/accountReducers';
 import axios from './lib/axios'
 import fetchUrl from './lib/fetchUrl'
 

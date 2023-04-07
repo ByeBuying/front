@@ -4,7 +4,7 @@ import fetchAccountsNormal from '../../../api/fetch/fetchAccountsNormal';
 import RegisterState from './RegisterState';
 import AccountsCode from "../../../model/accounts/code/AccountsCode"
 import MessageDialog from '../modal/MessageDialog';
-import DialogType from '../../../model/common/DialogType';
+import DialogType from '../../../model/common/messageDialog/code/DialogType';
 import { useDispatch, useSelector } from 'react-redux';
 
 function RegisterForm() {
