@@ -2,17 +2,24 @@ import React from 'react'
 import styled from 'styled-components';
 import { getMemberGradeColorCode } from '../../module/ColorCode';
 
+/**
+ * History
+ ** 2023-03-25: 임주형 - 최초생성
+ * @param {string} grade 멤버레벨 
+ */
+
 function MemberGradeBadge({ grade }) {
     return (
-        <MemberGradeBadgeDiv colorCode={getMemberGradeColorCode(grade)}>
+        <Contents
+            colorCode={getMemberGradeColorCode(grade)}>
             <MemberLevelSpan>{grade}</MemberLevelSpan>
-        </MemberGradeBadgeDiv>
+        </Contents>
     )
 }
 
 export default MemberGradeBadge;
 
-const MemberGradeBadgeDiv = styled.div`
+const Contents = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
