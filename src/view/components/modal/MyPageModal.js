@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components';
-import MemberGradeBadge from '../MemberGradeBadge';
 import { useSelector } from 'react-redux';
 import { assets } from '../../../model/lib/assets';
 import { getMemberGradeColorCode } from '../../../module/ColorCode';
@@ -11,8 +10,6 @@ import { getMemberGradeColorCode } from '../../../module/ColorCode';
  * @param {number} parentHeight 부모엘리먼트 높이
  * @returns {MyPageModal} Component
  */
-
-// TODO: MyInformation state는 마이페이지를 들어가야 받아오는 구조 -> 변경 필요
 
 function MyPageModal({ parentHeight }) {
     const myInformation = useSelector(state => state.MyInformation.data);
