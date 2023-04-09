@@ -6,12 +6,6 @@ import { loginUserSlice, myInformationSlice } from '../../../model/accounts/redu
 import { useNavigate } from 'react-router-dom';
 
 function MyPage() {
-    /*
-        쿠키(세션)가 HttpOnly로 설정된 경우: 클라이언트에서 읽기 불가능
-        세션 정보를 포함해야되는 요청(my-information 등)에서 ATE-003(NOT_AUTHORIZED)
-        로 응답이 오면 로그인 정보 관련 State 초기화
-    */
-
     const myInformation = useSelector(state => state.MyInformation);
     const navigate = useNavigate();
     const dispatch = useDispatch();

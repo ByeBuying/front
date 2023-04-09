@@ -33,9 +33,9 @@ function Header() {
         setShowMyPageModal(true);
     }
 
-    const handleMyPageBtnMouseLeave = () => {
-        setShowMyPageModal(false);
-    }
+    const handleMyPageBtnMouseLeave = () => setShowMyPageModal(false);
+
+    const handleModalUnmount = () => setShowMyPageModal(false);
 
     return (
         <Contents>
@@ -72,7 +72,7 @@ function Header() {
                             <SideMenuImg src={assets.myinfoIcon} alt="myinfo_icon" /> 마이페이지
                         </ImageButton>
                         {/* 마이페이지 모달 */}
-                        {showMyPageModal && (<MyPageModal parentHeight={myPageBtnHeight} />)}
+                        {showMyPageModal && (<MyPageModal parentHeight={myPageBtnHeight} onUnmount={() => handleModalUnmount()}/>)}
                     </div>
                 }
 
