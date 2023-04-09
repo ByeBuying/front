@@ -12,10 +12,10 @@ function Header() {
     const [showMyPageModal, setShowMyPageModal] = useState(false);
     const [myPageBtnHeight, setMyPageBtnHeight] = useState(0);
     const navigate = useNavigate();
-
-    const loginState = useSelector(state => state.LoginUser.code);
-    const isLogin = (loginState) => loginState === AccountsCode.SUCCESS;
-
+    
+    const loginUser = useSelector(state => state.LoginUser);
+    const isLogin = (loginUser) => loginUser.code === AccountsCode.SUCCESS;
+    
     // 검색창
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -33,9 +33,9 @@ function Header() {
         setShowMyPageModal(true);
     }
 
-    const handleMyPageBtnMouseLeave = () => {
-        setShowMyPageModal(false);
-    }
+    const handleMyPageBtnMouseLeave = () => setShowMyPageModal(false);
+
+    const handleModalUnmount = () => setShowMyPageModal(false);
 
     return (
         <Contents>
@@ -63,7 +63,7 @@ function Header() {
             </MidMenuBarDiv>
 
             <SideMenuBarDiv>
-                {isLogin(loginState) &&
+                {isLogin(loginUser) &&
                     <div className='relative'
                         onMouseEnter={handleMyPageBtnMouseEnter}
                         onMouseLeave={handleMyPageBtnMouseLeave}
@@ -72,11 +72,11 @@ function Header() {
                             <SideMenuImg src={assets.myinfoIcon} alt="myinfo_icon" /> 마이페이지
                         </ImageButton>
                         {/* 마이페이지 모달 */}
-                        {showMyPageModal && (<MyPageModal parentHeight={myPageBtnHeight} />)}
+                        {showMyPageModal && (<MyPageModal parentHeight={myPageBtnHeight} onUnmount={() => handleModalUnmount()}/>)}
                     </div>
                 }
 
-                {!isLogin(loginState) &&
+                {!isLogin(loginUser) &&
                     <ImageButton onClick={() => movePage('/login')} >
                         <SideMenuImg src={assets.loginIcon} alt="login_icon" />로그인
                     </ImageButton>

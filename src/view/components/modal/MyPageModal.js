@@ -1,8 +1,10 @@
 import React from 'react'
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { assets } from '../../../model/lib/assets';
 import { getMemberGradeColorCode } from '../../../module/ColorCode';
+import { useNavigate } from 'react-router-dom';
+import { loginUserSlice, myInformationSlice } from '../../../model/accounts/reducer/accountReducers';
 
 /**
  * History
@@ -11,21 +13,33 @@ import { getMemberGradeColorCode } from '../../../module/ColorCode';
  * @returns {MyPageModal} Component
  */
 
-function MyPageModal({ parentHeight }) {
-    const myInformation = useSelector(state => state.MyInformation.data);
-    console.log(myInformation);
+function MyPageModal({ parentHeight, onUnmount }) {
+    const myInformation = useSelector(state => state.MyInformation);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const logout = () => {
+        dispatch(loginUserSlice.actions.initState());
+        dispatch(myInformationSlice.actions.initState());
+        onUnmount();
+        navigate('/login');
+    }
+
     return (
         <Contents parentHeight={parentHeight}>
             <div className='flex'>
                 <MyInfoLeftDiv>
-                    <span className={`text-[${getMemberGradeColorCode(myInformation.grade)}] text-xs`}>
-                        {myInformation.grade}
+                    <span className={`text-[${getMemberGradeColorCode(myInformation.data.grade)}] text-xs`}>
+                        {myInformation.data.grade}
                     </span>
-                    <span className="font-semibold text-base hover:underline cursor-pointer">
-                        {myInformation.name}{" >"}
+                    <span
+                        className="font-semibold text-base hover:underline cursor-pointer"
+                        onClick={() => navigate('/myPage')}
+                    >
+                        {myInformation.data.name}{" >"}
                     </span>
-                    <span className="text-[#AAAAAA] text-xs mt-1">{
-                        myInformation.email}
+                    <span className="text-[#AAAAAA] text-xs mt-1">
+                        {myInformation.data.email}
                     </span>
                 </MyInfoLeftDiv>
                 <MyInfoRightDiv>
@@ -44,10 +58,14 @@ function MyPageModal({ parentHeight }) {
                 </MyInfoRightDiv>
             </div>
             <LogoutDiv>
-                <button className="hover:underline">로그아웃</button>
+                <button
+                    className="hover:underline"
+                    onClick={() => logout()}
+                >로그아웃
+                </button>
             </LogoutDiv>
         </Contents>
-    )
+    );
 }
 
 export default MyPageModal;
