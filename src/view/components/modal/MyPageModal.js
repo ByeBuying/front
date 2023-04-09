@@ -13,7 +13,7 @@ import { getMemberGradeColorCode } from '../../../module/ColorCode';
 
 function MyPageModal({ parentHeight }) {
     const myInformation = useSelector(state => state.MyInformation.data);
-    console.log(myInformation);
+
     return (
         <Contents parentHeight={parentHeight}>
             <div className='flex'>

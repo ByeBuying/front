@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import fetchMyInformation from '../../../api/fetch/fetchMyInformation';
 import Profile from '../../components/Profile';
-import AccountsCode from '../../../model/accounts/code/AccountsCode';
 import { loginUserSlice, myInformationSlice } from '../../../model/accounts/reducer/accountReducers';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,27 +12,19 @@ function MyPage() {
         로 응답이 오면 로그인 정보 관련 State 초기화
     */
 
-    const loginUser = useSelector(state => state.LoginUser.data);
     const myInformation = useSelector(state => state.MyInformation);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const useDidMount = () => { // ComponentDidMount
-        useEffect(() => {
-            dispatch(fetchMyInformation(loginUser));
-        }, []);
-    }
-    useDidMount();
-
     useEffect(() => {
-        // No Session - NOT_AUTHORIZED(ATE-003)
-        if(myInformation.code === AccountsCode.NOT_AUTHORIZED) {
-            // Delete LoginUser, MyInformation state
+        // No Session
+        if(myInformation.data === null) {
+            alert("접근 권한이 없습니다.");
+            // Delete state
             dispatch(loginUserSlice.actions.initState());
             dispatch(myInformationSlice.actions.initState());
             navigate('/login');
         }
-
     }, [myInformation]);
     
     return (
