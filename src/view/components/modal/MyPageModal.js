@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { assets } from '../../../model/lib/assets';
 import { getMemberGradeColorCode } from '../../../module/ColorCode';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * History
@@ -12,20 +13,24 @@ import { getMemberGradeColorCode } from '../../../module/ColorCode';
  */
 
 function MyPageModal({ parentHeight }) {
-    const myInformation = useSelector(state => state.MyInformation.data);
+    const myInformation = useSelector(state => state.MyInformation);
+    const navigate = useNavigate();
 
     return (
         <Contents parentHeight={parentHeight}>
             <div className='flex'>
                 <MyInfoLeftDiv>
-                    <span className={`text-[${getMemberGradeColorCode(myInformation.grade)}] text-xs`}>
-                        {myInformation.grade}
+                    <span className={`text-[${getMemberGradeColorCode(myInformation.data.grade)}] text-xs`}>
+                        {myInformation.data.grade}
                     </span>
-                    <span className="font-semibold text-base hover:underline cursor-pointer">
-                        {myInformation.name}{" >"}
+                    <span
+                        className="font-semibold text-base hover:underline cursor-pointer"
+                        onClick={() => navigate('/myPage')}
+                    >
+                        {myInformation.data.name}{" >"}
                     </span>
                     <span className="text-[#AAAAAA] text-xs mt-1">{
-                        myInformation.email}
+                        myInformation.data.email}
                     </span>
                 </MyInfoLeftDiv>
                 <MyInfoRightDiv>
