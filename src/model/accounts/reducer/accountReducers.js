@@ -11,7 +11,7 @@ import MyInformation from "../object/MyInformation";
 
 export const loginUserSlice = createSlice({
     name: 'accounts',
-    initialState: { data: LoginUser, code: AccountsCode.NONE, reqCnt: 0 },
+    initialState: { data: null, code: AccountsCode.NONE, reqCnt: 0 },
     reducers: {
         login: (state, action) => { // action type: "accounts/login"
             state.data = action.payload.data;
@@ -28,7 +28,7 @@ export const loginUserSlice = createSlice({
 
 export const myInformationSlice = createSlice({
     name: 'accounts',
-    initialState: { data: MyInformation, code: AccountsCode.NONE },
+    initialState: { data: null, code: AccountsCode.NONE },
     reducers: {
         myInformation: (state, action) => {
             state.data = action.payload.data;

@@ -8,7 +8,7 @@ const persistConfig = {
     key: "root",
     version: 1,
     storage: storageSession,
-    whitelist: ["LoginUser"] // whitelist만 sessionStorage에 저장
+    whitelist: ["LoginUser", "MyInformation"] // whitelist만 sessionStorage에 저장
 }
 
 const reducers = persistReducer(persistConfig, combineReducers({
