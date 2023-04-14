@@ -16,13 +16,12 @@ const persistor = persistStore(store);
 //
 
 const render = () => root.render(
-    <BrowserRouter>
-        <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-                <App />
-            </PersistGate>
-        </Provider>
-    </BrowserRouter>
+
+    <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+            <App />
+        </PersistGate>
+    </Provider>
 );
 render();
 const unsubscribe = store.subscribe(render);

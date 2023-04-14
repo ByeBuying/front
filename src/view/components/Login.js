@@ -24,8 +24,10 @@ function Login() {
                     navigate('/');
                     break;
                 case AccountsCode.BAD_CREDENTIALS:
-                    // 다이얼로그 오픈
                     setOpenLoginFailDialog(true);
+                    break;
+                case AccountsCode.INACTIVE_USER:
+                    navigate('/inActivate');
                     break;
                 default: ;
             }
