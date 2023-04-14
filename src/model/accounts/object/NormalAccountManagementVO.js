@@ -1,4 +1,4 @@
-const MyInformation = {
+const NormalAccountManagementVO = {
     accountId: null,
     email: null,
     name: null,
@@ -7,6 +7,8 @@ const MyInformation = {
     grade: null,
     addDiscount: null,
     addAccumulate: null,
-    activated: null
+    activated: null,
+    signUpDateTime: null,
+    recentSignInDateTime: null
 }
-export default MyInformation;
+export default NormalAccountManagementVO;

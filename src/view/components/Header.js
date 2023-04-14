@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import AccountsCode from '../../model/accounts/code/AccountsCode';
 import { assets } from '../../model/lib/assets';
 import MyPageModal from './modal/MyPageModal';
 
@@ -14,7 +13,7 @@ function Header() {
     const navigate = useNavigate();
     
     const loginUser = useSelector(state => state.LoginUser);
-    const isLogin = (loginUser) => loginUser.code === AccountsCode.SUCCESS;
+    const isLogin = (loginUser) => loginUser.data !== null;
     
     // 검색창
     const handleSubmit = (e) => {
@@ -99,7 +98,7 @@ const Contents = styled.div`
     width: 100%;
     justify-content: space-between;
     height: 96px;
-    margin-top: 35px;
+    margin-top: 80px;
     padding: 0 200px;
 `
 

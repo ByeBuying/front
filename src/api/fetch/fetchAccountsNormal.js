@@ -1,4 +1,5 @@
 import axios from './lib/axios';
+import fetchUrl from './lib/fetchUrl';
 
 /**
  * History
@@ -6,7 +7,7 @@ import axios from './lib/axios';
  */
 
 async function fetchAccountsNormal({ email, name, password, birthDay }) {
-    return await axios.post('/v1/auth/accounts/normal', {
+    return await axios.post(fetchUrl.accountsNormal, {
         "email": email,
         "name": name,
         "password": password,
