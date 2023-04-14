@@ -16,11 +16,12 @@ import fetchLogout from "../../../api/fetch/fetchLogout";
 
 function MyPageModal({ parentHeight, onUnmount }) {
     const myInformation = useSelector(state => state.MyInformation);
+    const { grade, name, email } = myInformation.data || {};
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const logout = () => {
-        fetchLogout(myInformation.data.email, myInformation.data.password).then(() => {
+        fetchLogout().then(() => {
             dispatch(loginUserSlice.actions.initState());
             dispatch(myInformationSlice.actions.initState());
             onUnmount();
@@ -32,17 +33,17 @@ function MyPageModal({ parentHeight, onUnmount }) {
         <Contents parentHeight={parentHeight}>
             <div className='flex'>
                 <MyInfoLeftDiv>
-                    <span className={`text-[${getMemberGradeColorCode(myInformation.data.grade)}] text-xs`}>
-                        {myInformation.data.grade}
+                    <span className={`text-[${getMemberGradeColorCode(grade)}] text-xs`}>
+                        {grade}
                     </span>
                     <span
                         className="font-semibold text-base hover:underline cursor-pointer"
                         onClick={() => navigate('/myPage')}
                     >
-                        {myInformation.data.name}{" >"}
+                        {name}{" >"}
                     </span>
                     <span className="text-[#AAAAAA] text-xs mt-1">
-                        {myInformation.data.email}
+                        {email}
                     </span>
                 </MyInfoLeftDiv>
                 <MyInfoRightDiv>

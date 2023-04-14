@@ -98,7 +98,7 @@ const Contents = styled.div`
     width: 100%;
     justify-content: space-between;
     height: 96px;
-    margin-top: 35px;
+    margin-top: 80px;
     padding: 0 200px;
 `
 

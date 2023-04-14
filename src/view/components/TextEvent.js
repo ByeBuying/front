@@ -5,7 +5,7 @@ import styled from 'styled-components';
 function TextEvent({ pageLink }) {
   return (
     <Contents>
-        <StyledLink to={pageLink}>Moin! 2023 Event 보러가기</StyledLink>
+      <StyledLink to={pageLink}>Moin! 2023 Event 보러가기</StyledLink>
     </Contents>
   )
 }
@@ -13,11 +13,13 @@ function TextEvent({ pageLink }) {
 export default TextEvent;
 
 const Contents = styled.div`
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 40px;
+    z-index: 1000;
     background-color: #5223CB;
 
 `
