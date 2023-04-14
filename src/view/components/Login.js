@@ -16,6 +16,8 @@ function Login() {
     const [openLoginFailDialog, setOpenLoginFailDialog] = useState(false);
 
     useEffect(() => {
+        // [feature/login-logout] #13 - 1
+
         if (clickedLoginButton) {
             switch (loginUser.code) {
                 case AccountsCode.SUCCESS:
