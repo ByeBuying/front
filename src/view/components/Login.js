@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import AccountsCode from '../../model/accounts/code/AccountsCode';
 import styled from 'styled-components';
-import MessageDialog from './MessageDialog';
-import DialogType from '../../model/common/DialogType';
+import MessageDialog from './modal/MessageDialog';
+import DialogType from '../../model/common/messageDialog/code/DialogType';
 
 function Login() {
     const dispatch = useDispatch();
@@ -16,14 +16,18 @@ function Login() {
     const [openLoginFailDialog, setOpenLoginFailDialog] = useState(false);
 
     useEffect(() => {
+        // [feature/login-logout] #13 - 1
+
         if (clickedLoginButton) {
             switch (loginUser.code) {
                 case AccountsCode.SUCCESS:
                     navigate('/');
                     break;
                 case AccountsCode.BAD_CREDENTIALS:
-                    // 다이얼로그 오픈
                     setOpenLoginFailDialog(true);
+                    break;
+                case AccountsCode.INACTIVE_USER:
+                    navigate('/inActivate');
                     break;
                 default: ;
             }

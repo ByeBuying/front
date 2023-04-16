@@ -2,8 +2,16 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import fetchAccountsNormal from '../../../api/fetch/fetchAccountsNormal';
 import RegisterState from './RegisterState';
+import AccountsCode from "../../../model/accounts/code/AccountsCode"
+import MessageDialog from '../modal/MessageDialog';
+import DialogType from '../../../model/common/messageDialog/code/DialogType';
+import { useDispatch } from 'react-redux';
+import { messageToastSlice } from '../../../model/common/messageToast/reducer/messageToastReducers';
+import { useNavigate } from 'react-router-dom';
 
 function RegisterForm() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         email: "",
         name: "",
@@ -11,20 +19,38 @@ function RegisterForm() {
         birthDay: ""
     });
 
+    const [openMessageDialog, setOpenMessageDialog] = useState(false);
+
     const handleChange = (e) => {
         setInputs({
             ...inputs,
             [e.target.name]: e.target.value
-        })
+        });
     }
 
     const requestAccountsNormal = (e) => {
         e.preventDefault();
-        fetchAccountsNormal(inputs);
+        fetchAccountsNormal(inputs).then(response => {
+            if(response.data.code === AccountsCode.ALREADY_EXIST_ACCOUNT) {
+                setOpenMessageDialog(true);
+            }
+            else if(response.data.code === AccountsCode.SUCCESS) {
+                dispatch(messageToastSlice.actions.show("회원가입 성공!"));
+                navigate('/');
+            }
+        });
     }
 
     return (
         <Contents>
+            { openMessageDialog && (
+                <MessageDialog 
+                    title={"회원가입 실패"}
+                    content={"이미 가입된 이메일이 있습니다."}
+                    type={DialogType.CONFIRM}
+                    confirm={() => setOpenMessageDialog(false)}
+                />
+            )}
             <RegisterState />
             <StyledForm>
                 <InputDiv>

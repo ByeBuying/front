@@ -1,8 +1,13 @@
-import { loginUserSlice } from '../../model/accounts/accountReducers';
+import { loginUserSlice } from '../../model/accounts/reducer/accountReducers';
 import axios from './lib/axios';
 import fetchUrl from './lib/fetchUrl';
 
-// Thunk Function
+/**
+ * History
+ ** 2023-03-24: 임주형 - 로그인API 호출 구현
+ */
+
+
 const fetchLogin = ({ email, password }) => {
     return async dispatch => {
         await axios.post(fetchUrl.login, {

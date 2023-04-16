@@ -1,38 +1,40 @@
 import AppLogoImg from '../../logo.svg';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import AccountsCode from '../../model/accounts/code/AccountsCode';
+import { assets } from '../../model/lib/assets';
+import MyPageModal from './modal/MyPageModal';
 
 function Header() {
     const [searchText, setSearchText] = useState("");
+    const [showMyPageModal, setShowMyPageModal] = useState(false);
+    const [myPageBtnHeight, setMyPageBtnHeight] = useState(0);
     const navigate = useNavigate();
-
-    const loginState = useSelector(state => state.LoginUser.code);
-    const isLogin = (loginState) => loginState === AccountsCode.SUCCESS;
-
-    // -- TEST --
+    
     const loginUser = useSelector(state => state.LoginUser);
-    const myInformation = useSelector(state => state.MyInformation);
-    // ----------
-
-    useEffect(() => {
-        console.log("loginUser:", loginUser);
-        console.log("myInformation:", myInformation);
-
-    }, [loginState]);
-
+    const isLogin = (loginUser) => loginUser.data !== null;
+    
+    // 검색창
     const handleSubmit = (e) => {
         e.preventDefault();
     }
-
     const handleChange = (e) => setSearchText(e.target.value);
 
     const movePage = (pathname) => {
         setSearchText("");
         navigate(pathname);
     }
+
+    const handleMyPageBtnMouseEnter = (e) => {
+        const target = e.currentTarget;
+        setMyPageBtnHeight(target.offsetHeight);
+        setShowMyPageModal(true);
+    }
+
+    const handleMyPageBtnMouseLeave = () => setShowMyPageModal(false);
+
+    const handleModalUnmount = () => setShowMyPageModal(false);
 
     return (
         <Contents>
@@ -47,7 +49,7 @@ function Header() {
                         value={searchText}
                     />
                     <SearchButton>
-                        <img src={AppLogoImg} />
+                        <img src={assets.searchIcon} alt="search_icon" />
                     </SearchButton>
                 </SearchForm>
                 <MidMenuDiv>
@@ -60,26 +62,30 @@ function Header() {
             </MidMenuBarDiv>
 
             <SideMenuBarDiv>
-                {isLogin(loginState) &&
-                    <ImageButton onClick={() => movePage('/myPage')} >
-                        <SideMenuImg src={AppLogoImg} alt="login_img" /> 마이페이지
-                    </ImageButton>
+                {isLogin(loginUser) &&
+                    <div className='relative'
+                        onMouseEnter={handleMyPageBtnMouseEnter}
+                        onMouseLeave={handleMyPageBtnMouseLeave}
+                    >
+                        <ImageButton onClick={() => movePage('/myPage')}>
+                            <SideMenuImg src={assets.myinfoIcon} alt="myinfo_icon" /> 마이페이지
+                        </ImageButton>
+                        {/* 마이페이지 모달 */}
+                        {showMyPageModal && (<MyPageModal parentHeight={myPageBtnHeight} onUnmount={() => handleModalUnmount()}/>)}
+                    </div>
                 }
-                {!isLogin(loginState) &&
+
+                {!isLogin(loginUser) &&
                     <ImageButton onClick={() => movePage('/login')} >
-                        <SideMenuImg src={AppLogoImg} alt="login_img" />로그인
-                    </ImageButton>
-                }
-                {!isLogin(loginState) &&
-                    <ImageButton onClick={() => movePage('/register')}>
-                        <SideMenuImg src={AppLogoImg} alt="login_img" />회원가입
+                        <SideMenuImg src={assets.loginIcon} alt="login_icon" />로그인
                     </ImageButton>
                 }
                 <ImageButton>
-                    <SideMenuImg src={AppLogoImg} alt="login_img" />고객센터
+                    <SideMenuImg src={assets.customerServiceIcon} alt="customer_service_icon" />고객센터
                 </ImageButton>
+
                 <ImageButton>
-                    <SideMenuImg src={AppLogoImg} alt="login_img" />장바구니
+                    <SideMenuImg src={assets.cartIcon} alt="cart_icon" />장바구니
                 </ImageButton>
             </SideMenuBarDiv>
         </Contents>
@@ -92,7 +98,7 @@ const Contents = styled.div`
     width: 100%;
     justify-content: space-between;
     height: 96px;
-    margin-top: 35px;
+    margin-top: 80px;
     padding: 0 200px;
 `
 
@@ -126,7 +132,7 @@ const SearchInput = styled.input`
 `
 
 const SearchButton = styled.button`
-    width: 40px;
+    width: 25px;
     height: fit-content;
     position: absolute;
 `
@@ -143,7 +149,7 @@ const SideMenuBarDiv = styled.div`
     width: 33%;
     justify-content: right;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     font-size: 14px;
 `
 
@@ -155,5 +161,6 @@ const ImageButton = styled.button`
 `
 
 const SideMenuImg = styled.img`
-    width: 50px;
+    width: 22px;
+    margin-bottom: 5px;
 `

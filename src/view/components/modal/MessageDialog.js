@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from 'react'
-import DialogType from "../../model/common/DialogType";
+import DialogType from "../../../model/common/messageDialog/code/DialogType";
 
 /**
  * History
