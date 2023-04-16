@@ -37,7 +37,7 @@ function Header() {
     const handleModalUnmount = () => setShowMyPageModal(false);
 
     return (
-        <Contents>
+        <Contents data-testid="header-component">
             <AppLogoDiv>
                 <img src={AppLogoImg} alt="app_logo_img" onClick={() => movePage('/')} />
             </AppLogoDiv>

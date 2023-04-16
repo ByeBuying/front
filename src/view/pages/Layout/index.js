@@ -9,10 +9,14 @@ import MessageToastState from '../../../model/common/messageToast/code/MessageTo
 import MessageToast from '../../components/modal/MessageToast';
 import fetchMyInformation from '../../../api/fetch/fetchMyInformation';
 import useActivation from '../../../api/hooks/useActivation';
+import styled from 'styled-components';
 
 /**
- * 
- * @returns 
+ * History
+ ** 2023-01-26: 임주형 - 최초생성
+ ** 2023-04-16: 임주형 - App.js와 분리
+ * 설명
+ ** Header, Footer를 포함하고 있는 최상위 페이지
  */
 
 function Layout() {
@@ -40,17 +44,24 @@ function Layout() {
     }, [messageToast]);
 
     return (
-        <div>
-            <div className='flex justify-center'>
+        <Contents>
+            <MessageToastDiv>
                 {openMessageToast && (<MessageToast message={messageToast.message} />)}
-            </div>
+            </MessageToastDiv>
             <TextEvent pageLink={'/'} />
-            <Header data-testid="header-component" />
+            <Header />
             <section>
                 <Outlet />
             </section>
             <Footer />
-        </div>
-    );
+        </Contents>
+    )
 }
 export default Layout;
+
+const Contents = styled.div``
+
+const MessageToastDiv = styled.div`
+    display: flex;
+    justify-content: center;
+`

@@ -9,8 +9,11 @@ import AccountActivation from './view/components/AccountActivation';
 import Layout from './view/pages/Layout';
 
 /**
- * 
- * @returns 
+ ** History
+ * 2023-01-26: 임주형 - 최초 생성
+ * 2023-04-16: 임주형 - Layout 컴포넌트와 분리
+ * 설명
+ ** 라우팅 전용 컴포넌트
  */
 
 function App() {
