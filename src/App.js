@@ -23,7 +23,6 @@ function Layout() {
   const dispatch = useDispatch();
   const [isActivated] = useActivation();
 
-  // 로그인 상태 확인
   useEffect(() => {
     if (isActivated === false) {
 
@@ -42,6 +41,7 @@ function Layout() {
 
   return (
     <div>
+      learn react
       <div className='flex justify-center'>
         {openMessageToast && (<MessageToast message={messageToast.message} />)}
       </div>

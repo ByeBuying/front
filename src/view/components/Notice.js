@@ -2,12 +2,12 @@ import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper';
 import 'swiper/swiper.min.css';
-// import 'swiper/modules/navigation/navigation.min.css';
-// import 'swiper/modules/pagination/pagination.min.css';
-// import 'swiper/modules/scrollbar/scrollbar.min.css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+import 'swiper/modules/navigation/navigation.min.css';
+import 'swiper/modules/pagination/pagination.min.css';
+import 'swiper/modules/scrollbar/scrollbar.min.css';
+// import 'swiper/css/navigation';
+// import 'swiper/css/pagination';
+// import 'swiper/css/scrollbar';
 import styled from 'styled-components';
 
 function Notice({ notice }) {
