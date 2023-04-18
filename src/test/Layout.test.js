@@ -12,7 +12,7 @@ beforeAll(() => {
     persistor = persistStore(store);
 })
 
-describe("Layout component initial rendering test", () => {
+describe("Children components rendering test", () => {
     test("Renders Header component inside Layout component", () => {
         render(
             <BrowserRouter>
@@ -26,5 +26,20 @@ describe("Layout component initial rendering test", () => {
 
         const headerComponent = screen.getByTestId("header-component");
         expect(headerComponent).toBeInTheDocument();
+    });
+
+    test("Renders Footer component inside Layout component", () => {
+        render(
+            <BrowserRouter>
+                <Provider store={store}>
+                    <PersistGate loading={null} persistor={persistor}>
+                        <Layout />
+                    </PersistGate>
+                </Provider>
+            </BrowserRouter>
+        );
+
+        const footerComponent = screen.getByTestId("footer-component");
+        expect(footerComponent).toBeInTheDocument();
     });
 })
