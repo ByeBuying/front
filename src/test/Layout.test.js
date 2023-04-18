@@ -42,4 +42,22 @@ describe("Children components rendering test", () => {
         const footerComponent = screen.getByTestId("footer-component");
         expect(footerComponent).toBeInTheDocument();
     });
+
+    test("MessageToast should display Layout component", () => {
+        
+
+        render(
+            <BrowserRouter>
+                <Provider store={store}>
+                    <PersistGate loading={null} persistor={persistor}>
+                        <Layout />
+                    </PersistGate>
+                </Provider>
+            </BrowserRouter>
+        );
+
+        
+        const messageToast = screen.getByTestId("message-toast");
+        expect(messageToast).toBeInTheDocument();
+    })
 })
