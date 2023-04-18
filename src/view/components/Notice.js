@@ -2,12 +2,15 @@ import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper';
 import 'swiper/swiper.min.css';
+
+/**  테스팅 어려워서 Swiper 모듈 안 쓸 예정 */
+
 // import 'swiper/modules/navigation/navigation.min.css';
 // import 'swiper/modules/pagination/pagination.min.css';
 // import 'swiper/modules/scrollbar/scrollbar.min.css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+// import 'swiper/css/navigation';
+// import 'swiper/css/pagination';
+// import 'swiper/css/scrollbar';
 import styled from 'styled-components';
 
 function Notice({ notice }) {
@@ -23,7 +26,7 @@ function Notice({ notice }) {
                 pauseOnMouseEnter: true
             }}>
 
-            {notice.map((data) => (
+            {notice && notice.map((data) => (
                 <SwiperSlide>
                     <Img
                         key={data.id}
