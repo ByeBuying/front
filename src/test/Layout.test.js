@@ -44,8 +44,6 @@ describe("Children components rendering test", () => {
     });
 
     test("MessageToast should display Layout component", () => {
-        
-
         render(
             <BrowserRouter>
                 <Provider store={store}>
@@ -56,7 +54,6 @@ describe("Children components rendering test", () => {
             </BrowserRouter>
         );
 
-        
         const messageToast = screen.getByTestId("message-toast");
         expect(messageToast).toBeInTheDocument();
     })
