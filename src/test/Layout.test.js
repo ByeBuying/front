@@ -5,6 +5,7 @@ import store from '../model/lib/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
 import { BrowserRouter } from 'react-router-dom';
+import React from 'react';
 
 let persistor;
 
@@ -43,7 +44,7 @@ describe("Children components rendering test", () => {
         expect(footerComponent).toBeInTheDocument();
     });
 
-    test("MessageToast should display Layout component", () => {
+    test("Renders Text Event component inside Layout component", () => {
         render(
             <BrowserRouter>
                 <Provider store={store}>
@@ -54,7 +55,7 @@ describe("Children components rendering test", () => {
             </BrowserRouter>
         );
 
-        const messageToast = screen.getByTestId("message-toast");
-        expect(messageToast).toBeInTheDocument();
-    })
+        const textEventComponent = screen.getByTestId("text-event-component");
+        expect(textEventComponent).toBeInTheDocument();
+    });
 })
