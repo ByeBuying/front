@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 function TextEvent({ pageLink }) {
   return (
-    <Contents>
+    <Contents data-testid="text-event-component">
       <StyledLink to={pageLink}>Moin! 2023 Event 보러가기</StyledLink>
     </Contents>
   )

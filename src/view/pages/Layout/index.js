@@ -20,7 +20,7 @@ import styled from 'styled-components';
  */
 
 function Layout() {
-    const [openMessageToast, setOpenMessageToast] = useState(false);
+    const [openMessageToast, setOpenMessageToast] = React.useState(false);
     const messageToast = useSelector(state => state.MessageToast);
     const loginUser = useSelector(state => state.LoginUser);
     const dispatch = useDispatch();
@@ -50,7 +50,7 @@ function Layout() {
             </MessageToastDiv>
             <TextEvent pageLink={'/'} />
             <Header />
-            <section>
+            <section data-testid="section-element">
                 <Outlet />
             </section>
             <Footer />

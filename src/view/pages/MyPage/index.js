@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Profile from '../../components/Profile';
 import { loginUserSlice, myInformationSlice } from '../../../model/accounts/reducer/accountReducers';
 import { useNavigate } from 'react-router-dom';
+import Unregister from '../../components/Unregister';
 
 function MyPage() {
     const myInformation = useSelector(state => state.MyInformation);
@@ -26,7 +27,8 @@ function MyPage() {
             <MenuDiv>
             </MenuDiv>
             <ContentDiv>
-                <Profile />
+                {/* <Profile /> */}
+                <Unregister />
             </ContentDiv>
 
         </Contents>
