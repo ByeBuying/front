@@ -22,6 +22,7 @@ function MessageToast({ message }) {
 
     return (
         <Contents
+            data-testid="message-toast"
             animation={animation}
             onAnimationEnd={() => {
                 if (isSlideDownAnimEnd) dispatch(messageToastSlice.actions.close());

@@ -5,6 +5,7 @@
  * @param {string} myInformation /api/v1/pub/accounts/my-information
  * @param {string} logout /api/logout
  * @param {string} accountsNormal /api/v1/auth/accounts/normal
+ * @param {string} updateActivated /api/v1/pub/accounts/update:activated
  */
 
 const fetchUrl = {
@@ -12,6 +13,7 @@ const fetchUrl = {
     login: "/login",
     logout: "/logout",
     myInformation: "/v1/pub/accounts/my-information",
-    accountsNormal: "/v1/auth/accounts/normal"
+    accountsNormal: "/v1/auth/accounts/normal",
+    updateActivated: "/v1/pub/accounts/update:activated"
 }
 export default fetchUrl;
