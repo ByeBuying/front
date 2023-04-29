@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { loginUserSlice } from '../../model/accounts/reducer/accountReducers';
 import { myInformationSlice } from '../../model/accounts/reducer/accountReducers';
 import axios from './lib/axios'
@@ -5,8 +6,12 @@ import fetchUrl from './lib/fetchUrl'
 
 /**
  * History
- ** 2023-03-24: 임주형 - 로그인API 호출 구현
+ ** 2023-03-24: 임주형 - 로그인API, 회원정보API 호출 구현
  ** 2023-04-14: 임주형 - 로그아웃API 호출 구현
+ ** 2023-04-26: 임주형 - updateActivated(회원탈퇴)API 호출 구현
+ ** 2023-04-26: 임주형 - authorityCheck: 
+    - LoginUser API를 사용하여 비밀번호가 일치하는지 확인하는 API
+    - Store에 결과가 저장되지 않는다.
  */
 
 const fetchAccount = {
@@ -20,14 +25,23 @@ const fetchAccount = {
                     "Content-Type": "application/x-www-form-urlencoded"
                 }
             })
-            
             .then(response => dispatch(loginUserSlice.actions.login(response.data)))
-            
             .catch(error => {
                 console.log(error);
                 debugger;
             });
         }
+    },
+
+    async authorityCheck(email, password) {
+        return await axios.post(fetchUrl.login, {
+            "email": email,
+            "password": password,
+        }, {
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        });
     },
 
     async logout() {
@@ -44,7 +58,6 @@ const fetchAccount = {
                 .then(response => dispatch(myInformationSlice.actions.myInformation(response.data)))
                 .catch(error => {
                     console.log(error);
-                    debugger;
                 });
         }
     },
@@ -62,12 +75,9 @@ const fetchAccount = {
         });
     },
 
-    async updateActivated({ loginUser, activated }) {
+    async updateActivated({ activated }) {
         return await axios.put(fetchUrl.updateActivated, {
-            "loginUser": loginUser,
-            "": {
-                "activated": activated
-            }
+            "activated": activated
         }, {
             headers: {
                 "Content-Type": "application/json"

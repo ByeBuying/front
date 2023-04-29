@@ -1,16 +1,76 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
+import fetchLogin from '../../api/fetch/fetchLogin';
+import { useDispatch, useSelector } from 'react-redux';
+import AccountsCode from '../../model/accounts/code/AccountsCode';
+import MessageDialog from './modal/MessageDialog';
+import DialogType from '../../model/common/messageDialog/code/DialogType';
+import fetchAccount from '../../api/fetch/fetchAccount';
 
 function Unregister() {
     const [password, setPassword] = useState("");
-    
+    const [openMessageDialog, setOpenMessageDialog] = useState(false);
+    const [dialog, setDialog] = useState({
+        title: "",
+        content: "",
+        type: "",
+        confirm: null,
+        cancel: null
+    });
+    const myInformation = useSelector(state => state.MyInformation);
+
     const handleChange = (e) => {
         setPassword(e.target.value);
     }
 
+    const requestUnregister = (e) => {
+        e.preventDefault();
+
+        fetchAccount.authorityCheck(myInformation.data.email, password)
+            .then(response => {
+                if (response.data.code === AccountsCode.BAD_CREDENTIALS) {
+                    setOpenMessageDialog(true);
+                    setDialog({
+                        title: "로그인 정보 오류",
+                        content: "비밀번호가 틀렸습니다.",
+                        type: DialogType.CONFIRM,
+                        confirm: () => setOpenMessageDialog(false)
+                    });
+                }
+                else if(response.data.code === AccountsCode.SUCCESS) {
+                    setOpenMessageDialog(true);
+                    setDialog({
+                        title: "회원탈퇴",
+                        content: "탈퇴하시겠습니까?",
+                        type: DialogType.CONFIRM_AND_CANCEL,
+                        confirm: () => {
+                            fetchAccount.updateActivated({
+                                activated: false
+                            });
+                            setOpenMessageDialog(false);
+                        },
+                        cancel: () => setOpenMessageDialog(false)
+                    });
+                }
+            }).catch(error => {
+                debugger;
+            });
+    }
+
+
+
 
     return (
         <Contents data-testid="unregister-component">
+            {openMessageDialog && (
+                <MessageDialog
+                    title={dialog.title}
+                    content={dialog.content}
+                    type={dialog.type}
+                    confirm={dialog.confirm}
+                    cancel={dialog.cancel}
+                />
+            )}
             <p className="text-xl font-semibold mb-10">회원 탈퇴</p>
             <p>회원 탈퇴를 신청하면 30일 이후 계정이 삭제되며, 쿠폰 및 적립금이 모두 소멸됩니다.</p>
             <p className="mb-5">또한, 계정이 삭제되면 복구할 수 없습니다.</p>
@@ -28,7 +88,8 @@ function Unregister() {
                     type="password"
                     onChange={(e) => handleChange(e)}
                     placeholder="현재 비밀번호" />
-                <button className="w-[6rem] bg-[#5223CB] border rounded-md">
+                <button className="w-[6rem] bg-[#5223CB] border rounded-md"
+                    onClick={(e) => requestUnregister(e)}>
                     <p className="text-white">탈퇴하기</p>
                 </button>
             </FormDiv>
