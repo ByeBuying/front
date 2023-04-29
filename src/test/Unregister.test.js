@@ -5,37 +5,34 @@ import axios from '../api/fetch/lib/axios';
 
 describe("Session test", () => {
     const requestMock = {
-        loginUser: {
-            accountId: 0,
-            // ... //
-        }
+        email: "test",
+        password: "test"
     }
 
     test("If session is connected then should be return SUCCESS code", () => {
         /* arrange */
         const fetchResultMock = {
             code: AccountsCode.SUCCESS, // Session is connected
-            data: { // NormalAccountManagementVO
+            data: {
                 accountId: 0,
-                // ... //
             }
         }
-        jest.spyOn(fetchAccount, "myInformation")
+        jest.spyOn(fetchAccount, "login")
             .mockReturnValueOnce(fetchResultMock);
 
         /* act */
-        fetchAccount.myInformation(requestMock);
+        fetchAccount.login(requestMock);
 
         /* assert */
-        expect(fetchAccount.myInformation).toBeCalledWith({
-            "loginUser": {
-                "accountId": 0,
-            }
+        expect(fetchAccount.login).toBeCalledWith({
+            "email": "test",
+            "password": "test"
         });
-        expect(fetchAccount.myInformation).toReturnWith({
+        expect(fetchAccount.login).toReturnWith({
             "code": AccountsCode.SUCCESS,
             "data": {
                 "accountId": 0,
+                // ... //
             }
         });
     });
@@ -46,19 +43,18 @@ describe("Session test", () => {
             code: AccountsCode.NOT_AUTHORIZED, // Session is disconnected
             data: null
         }
-        jest.spyOn(fetchAccount, "myInformation")
+        jest.spyOn(fetchAccount, "login")
             .mockReturnValueOnce(fetchResultMock);
-        
+
         /* act */
-        fetchAccount.myInformation(requestMock);
+        fetchAccount.login(requestMock);
 
         /* assert */
-        expect(fetchAccount.myInformation).toBeCalledWith({
-            "loginUser": {
-                "accountId": 0,
-            }
+        expect(fetchAccount.login).toBeCalledWith({
+            "email": "test",
+            "password": "test"
         });
-        expect(fetchAccount.myInformation).toReturnWith({
+        expect(fetchAccount.login).toReturnWith({
             "code": AccountsCode.NOT_AUTHORIZED,
             "data": null,
         });
@@ -83,19 +79,19 @@ describe("Unregister Button click test", () => {
 
         return await axios.put("/v1/pub/accounts/update:activated", {
             loginUser,
-            activated
+            "dto": {
+                activated: false
+            }
+        }, {
+            headers: {
+                "Content-Type": "application/json"
+            }
         });
-    }
+    };
 
     const Button = () => {
         const requestMock = {
-            loginUser: {
-                accountId: 0,
-                // ... //
-            },
-            "": {
-                activated: false
-            }
+            activated: false
         };
 
         const handleClick = () => {
@@ -121,6 +117,5 @@ describe("Unregister Button click test", () => {
         const unregisterButton = screen.getByTestId("unregister-button");
         fireEvent.click(unregisterButton);
     });
-
 });
 
