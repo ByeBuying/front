@@ -7,6 +7,7 @@ import RegisterForm from './view/components/register/RegisterForm';
 import MyPage from './view/pages/MyPage';
 import AccountActivation from './view/components/AccountActivation';
 import Layout from './view/pages/Layout';
+import UnregisterComplete from './view/components/unregister/UnregisterComplete';
 
 /**
  ** History
@@ -29,6 +30,7 @@ function App() {
             <Route path="myPage" element={<MyPage />} />
             <Route path="inActivate" element={<AccountActivation />} />
           </Route>
+          <Route path="unregisterComplete" element={<UnregisterComplete />} />
           <Route path="*" element={<div>Not found</div>} />
         </Routes>
       </BrowserRouter>
