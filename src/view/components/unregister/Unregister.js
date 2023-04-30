@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
-import fetchLogin from '../../api/fetch/fetchLogin';
-import { useDispatch, useSelector } from 'react-redux';
-import AccountsCode from '../../model/accounts/code/AccountsCode';
-import MessageDialog from './modal/MessageDialog';
-import DialogType from '../../model/common/messageDialog/code/DialogType';
-import fetchAccount from '../../api/fetch/fetchAccount';
+import { useSelector } from 'react-redux';
+import AccountsCode from '../../../model/accounts/code/AccountsCode';
+import MessageDialog from '../modal/MessageDialog';
+import DialogType from '../../../model/common/messageDialog/code/DialogType';
+import fetchAccount from '../../../api/fetch/fetchAccount';
+import { useNavigate } from 'react-router-dom';
 
 function Unregister() {
+    const navigate = useNavigate();
     const [password, setPassword] = useState("");
     const [openMessageDialog, setOpenMessageDialog] = useState(false);
     const [dialog, setDialog] = useState({
@@ -25,7 +26,6 @@ function Unregister() {
 
     const requestUnregister = (e) => {
         e.preventDefault();
-
         fetchAccount.authorityCheck(myInformation.data.email, password)
             .then(response => {
                 if (response.data.code === AccountsCode.BAD_CREDENTIALS) {
@@ -48,6 +48,8 @@ function Unregister() {
                                 activated: false
                             });
                             setOpenMessageDialog(false);
+                            fetchAccount.logout();
+                            navigate("/unregisterComplete");
                         },
                         cancel: () => setOpenMessageDialog(false)
                     });
@@ -56,9 +58,6 @@ function Unregister() {
                 debugger;
             });
     }
-
-
-
 
     return (
         <Contents data-testid="unregister-component">

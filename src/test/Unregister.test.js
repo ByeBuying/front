@@ -78,10 +78,7 @@ describe("Unregister Button click test", () => {
                 }));
 
         return await axios.put("/v1/pub/accounts/update:activated", {
-            loginUser,
-            "dto": {
-                activated: false
-            }
+            activated: false
         }, {
             headers: {
                 "Content-Type": "application/json"

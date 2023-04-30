@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Profile from '../../components/Profile';
 import { loginUserSlice, myInformationSlice } from '../../../model/accounts/reducer/accountReducers';
 import { useNavigate } from 'react-router-dom';
-import Unregister from '../../components/Unregister';
+import Unregister from '../../components/unregister/Unregister';
 
 function MyPage() {
     const myInformation = useSelector(state => state.MyInformation);
@@ -12,6 +12,7 @@ function MyPage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        console.log("MyPage")
         // No Session
         if(myInformation.data === null) {
             alert("접근 권한이 없습니다.");
@@ -20,7 +21,7 @@ function MyPage() {
             dispatch(myInformationSlice.actions.initState());
             navigate('/login');
         }
-    }, [myInformation]);
+    }, []);
     
     return (
         <Contents>
