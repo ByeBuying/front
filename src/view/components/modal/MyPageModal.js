@@ -5,7 +5,7 @@ import { assets } from '../../../model/lib/assets';
 import { getMemberGradeColorCode } from '../../../module/ColorCode';
 import { useNavigate } from 'react-router-dom';
 import { loginUserSlice, myInformationSlice } from '../../../model/accounts/reducer/accountReducers';
-import fetchLogout from "../../../api/fetch/fetchLogout";
+import fetchAccount from "../../../api/fetch/fetchAccount";
 
 /**
  * History
@@ -20,8 +20,7 @@ function MyPageModal({ parentHeight, onUnmount }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const logout = () => {
-        fetchLogout().then(() => {
+    const logout = () => {fetchAccount.logout().then(() => {
             dispatch(loginUserSlice.actions.initState());
             dispatch(myInformationSlice.actions.initState());
             onUnmount();

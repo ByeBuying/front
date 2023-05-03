@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import { loginUserSlice } from '../../model/accounts/reducer/accountReducers';
 import { myInformationSlice } from '../../model/accounts/reducer/accountReducers';
 import axios from './lib/axios'
@@ -9,9 +8,7 @@ import fetchUrl from './lib/fetchUrl'
  ** 2023-03-24: 임주형 - 로그인API, 회원정보API 호출 구현
  ** 2023-04-14: 임주형 - 로그아웃API 호출 구현
  ** 2023-04-26: 임주형 - updateActivated(회원탈퇴)API 호출 구현
- ** 2023-04-26: 임주형 - authorityCheck: 
-    - LoginUser API를 사용하여 비밀번호가 일치하는지 확인하는 API
-    - Store에 결과가 저장되지 않는다.
+ ** 2023-04-26: 임주형 - authorityCheck
  */
 
 const fetchAccount = {
