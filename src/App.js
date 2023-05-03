@@ -1,13 +1,13 @@
 import './App.css';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Main from './view/pages/Main';
-import Login from './view/components/Login';
+import Login from './view/components/login/Login';
 import RegisterTerms from './view/components/register/RegisterTerms';
 import RegisterForm from './view/components/register/RegisterForm';
 import MyPage from './view/pages/MyPage';
-import AccountActivation from './view/components/AccountActivation';
 import Layout from './view/pages/Layout';
 import UnregisterComplete from './view/components/unregister/UnregisterComplete';
+import Inactivate from './view/components/login/Inactivate';
 
 /**
  ** History
@@ -28,7 +28,7 @@ function App() {
             <Route path="register" element={<RegisterTerms />} />
             <Route path="registerForm" element={<RegisterForm />} />
             <Route path="myPage" element={<MyPage />} />
-            <Route path="inActivate" element={<AccountActivation />} />
+            <Route path="inactivate" element={<Inactivate />} />
           </Route>
           <Route path="unregisterComplete" element={<UnregisterComplete />} />
           <Route path="*" element={<div>Not found</div>} />
