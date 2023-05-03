@@ -12,7 +12,6 @@ function MyPage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log("MyPage")
         // No Session
         if(myInformation.data === null) {
             alert("접근 권한이 없습니다.");

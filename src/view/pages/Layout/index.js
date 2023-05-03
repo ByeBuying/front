@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import MessageToastState from '../../../model/common/messageToast/code/MessageToastState';
 import MessageToast from '../../components/modal/MessageToast';
 import fetchMyInformation from '../../../api/fetch/fetchMyInformation';
-import useActivation from '../../../api/hooks/useActivation';
 import styled from 'styled-components';
 
 /**
@@ -24,18 +23,14 @@ function Layout() {
     const messageToast = useSelector(state => state.MessageToast);
     const loginUser = useSelector(state => state.LoginUser);
     const dispatch = useDispatch();
-    const [isActivated] = useActivation();
 
     // 로그인 상태 확인
     useEffect(() => {
-        if (isActivated === false) {
-
-        }
-
         if (loginUser.data !== null) {
-            dispatch(fetchMyInformation(loginUser.data));
-        }
-    }, [isActivated, loginUser]);
+          if(loginUser.data.activated) dispatch(fetchMyInformation(loginUser.data));  
+        } 
+
+    }, [loginUser]);
 
     // MessageToast
     useEffect(() => {

@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+// import { useEffect, useState } from "react";
+// import { useSelector } from "react-redux";
 
-function useActivation() {
-    const [isActivated, setIsActivated] = useState(null);
-    const myInformation = useSelector(state => state.MyInformation);
+// function useActivation() {
+//     const [isActivated, setIsActivated] = useState(null);
+//     const myInformation = useSelector(state => state.MyInformation);
     
-    useEffect(() => {
-        const myInformationData = myInformation.data || {};
-        setIsActivated(myInformationData.activated);
-    }, [myInformation]);
+//     useEffect(() => {
+//         const myInformationData = myInformation.data || {};
+//         setIsActivated(myInformationData.activated);
+//     }, [myInformation]);
 
-    return [isActivated];
-}
-export default useActivation;
+//     return [isActivated];
+// }
+// export default useActivation;

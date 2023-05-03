@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import AppLogo from '../../logo.svg'
-import fetchLogin from '../../api/fetch/fetchLogin';
+import AppLogo from '../../../logo.svg';
+import fetchLogin from '../../../api/fetch/fetchLogin';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import AccountsCode from '../../model/accounts/code/AccountsCode';
+import AccountsCode from '../../../model/accounts/code/AccountsCode';
 import styled from 'styled-components';
-import MessageDialog from './modal/MessageDialog';
-import DialogType from '../../model/common/messageDialog/code/DialogType';
+import MessageDialog from '../modal/MessageDialog';
+import DialogType from '../../../model/common/messageDialog/code/DialogType';
 
 function Login() {
     const dispatch = useDispatch();
@@ -21,13 +21,12 @@ function Login() {
         if (clickedLoginButton) {
             switch (loginUser.code) {
                 case AccountsCode.SUCCESS:
-                    navigate('/');
+                    // activated 확인
+                    if(!loginUser.data.activated) navigate("/inactivate")
+                    else navigate('/');
                     break;
                 case AccountsCode.BAD_CREDENTIALS:
                     setOpenLoginFailDialog(true);
-                    break;
-                case AccountsCode.INACTIVE_USER:
-                    navigate('/inActivate');
                     break;
                 default: ;
             }
