@@ -44,9 +44,7 @@ function Unregister() {
                         content: "탈퇴하시겠습니까?",
                         type: DialogType.CONFIRM_AND_CANCEL,
                         confirm: () => {
-                            fetchAccount.updateActivated({
-                                activated: false
-                            });
+                            fetchAccount.updateActivated(false);
                             setOpenMessageDialog(false);
                             fetchAccount.logout();
                             navigate("/unregisterComplete");
