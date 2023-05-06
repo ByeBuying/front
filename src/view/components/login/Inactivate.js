@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import fetchAccount from "../../../api/fetch/fetchAccount"
+import fetchAccount from "../../../api/fetch/fetchAccount";
+import { useDispatch } from 'react-redux';
+import { messageToastSlice } from '../../../model/common/messageToast/reducer/messageToastReducers';
 
 /**
  * History
@@ -10,6 +12,7 @@ import fetchAccount from "../../../api/fetch/fetchAccount"
 
 function Inactivate() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         return () => {
@@ -17,6 +20,13 @@ function Inactivate() {
             fetchAccount.logout();
         }
     }, []);
+
+    const active = () => {
+        fetchAccount.updateActivated(true).then(response => {
+            navigate("/login");
+            dispatch(messageToastSlice.actions.show("계정 활성화 완료!"));
+        });
+    }
 
     return (
         <Contents>
@@ -28,7 +38,9 @@ function Inactivate() {
             </SubtitleDiv>
             <BottomButtonDiv>
                 <BottomButton onClick={() => navigate('/')}>홈으로</BottomButton>
-                <BottomButton className="bg-[#5223CB] text-white">
+                <BottomButton className="bg-[#5223CB] text-white"
+                    onClick={() => active()}
+                >
                     활성화
                 </BottomButton>
             </BottomButtonDiv>
