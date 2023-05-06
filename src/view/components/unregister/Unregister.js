@@ -68,7 +68,7 @@ function Unregister() {
                     cancel={dialog.cancel}
                 />
             )}
-            <p className="text-xl font-semibold mb-10">회원 탈퇴</p>
+            <h1 className="text-xl font-semibold mb-10">회원 탈퇴</h1>
             <p>회원 탈퇴를 신청하면 30일 이후 계정이 삭제되며, 쿠폰 및 적립금이 모두 소멸됩니다.</p>
             <p className="mb-5">또한, 계정이 삭제되면 복구할 수 없습니다.</p>
             <UserInfoDiv>
