@@ -72,7 +72,7 @@ const fetchAccount = {
         });
     },
 
-    async updateActivated({ activated }) {
+    async updateActivated(activated) {
         return await axios.put(fetchUrl.updateActivated, {
             "activated": activated
         }, {
