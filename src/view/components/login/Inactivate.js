@@ -16,6 +16,7 @@ function Inactivate() {
 
     useEffect(() => {
         return () => {
+            // TODO: 사용자가 직접 URL을 바꿔 컴포넌트를 이동했을 때는 Unmount 되지 않는다.
             console.log("unmount");
             fetchAccount.logout();
         }

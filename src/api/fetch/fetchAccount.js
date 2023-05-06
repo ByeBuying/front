@@ -9,6 +9,7 @@ import fetchUrl from './lib/fetchUrl'
  ** 2023-04-14: 임주형 - 로그아웃API 호출 구현
  ** 2023-04-26: 임주형 - updateActivated(회원탈퇴)API 호출 구현
  ** 2023-04-26: 임주형 - authorityCheck
+ ** 2023-05-06: 임주형 - updatePassword
  */
 
 const fetchAccount = {
@@ -80,6 +81,21 @@ const fetchAccount = {
                 "Content-Type": "application/json"
             }
         });
-    }
+    },
+
+    /** 
+     * @param {string} newPassword 변경할 패스워드
+     * @param {string} confirmPassword 현재 패스워드
+    */
+    async updatePassword(newPassword, confirmPassword) {
+        return await axios.put(fetchUrl.updatePassword, {
+            "newPassword": newPassword,
+            "confirmPassword": confirmPassword
+        }, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+    },
 }
 export default fetchAccount;
