@@ -7,13 +7,13 @@ import { assets } from '../../model/lib/assets';
 import MyPageModal from './modal/MyPageModal';
 
 function Header() {
+    const navigate = useNavigate();
     const [searchText, setSearchText] = useState("");
     const [showMyPageModal, setShowMyPageModal] = useState(false);
     const [myPageBtnHeight, setMyPageBtnHeight] = useState(0);
-    const navigate = useNavigate();
+    const myInformation = useSelector(state => state.MyInformation);
     
-    const loginUser = useSelector(state => state.LoginUser);
-    const isLogin = (loginUser) => loginUser.data !== null;
+    const isLogin = (myInformation) => myInformation.data !== null;
     
     // 검색창
     const handleSubmit = (e) => {
@@ -37,7 +37,7 @@ function Header() {
     const handleModalUnmount = () => setShowMyPageModal(false);
 
     return (
-        <Contents>
+        <Contents data-testid="header-component">
             <AppLogoDiv>
                 <img src={AppLogoImg} alt="app_logo_img" onClick={() => movePage('/')} />
             </AppLogoDiv>
@@ -62,7 +62,7 @@ function Header() {
             </MidMenuBarDiv>
 
             <SideMenuBarDiv>
-                {isLogin(loginUser) &&
+                {isLogin(myInformation) &&
                     <div className='relative'
                         onMouseEnter={handleMyPageBtnMouseEnter}
                         onMouseLeave={handleMyPageBtnMouseLeave}
@@ -75,7 +75,7 @@ function Header() {
                     </div>
                 }
 
-                {!isLogin(loginUser) &&
+                {!isLogin(myInformation) &&
                     <ImageButton onClick={() => movePage('/login')} >
                         <SideMenuImg src={assets.loginIcon} alt="login_icon" />로그인
                     </ImageButton>

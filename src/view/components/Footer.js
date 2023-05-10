@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 function Footer() {
     return (
-        <Contents>
+        <Contents data-testid="footer-component">
             <LeftContentsDiv>
                 <TermsAndConditions>
                     <button>이용약관</button>
