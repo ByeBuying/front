@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import fetchAccount from '../../api/fetch/fetchAccount';
 import AccountsCode from '../../model/accounts/code/AccountsCode';
+import { useSelector } from 'react-redux';
 
 function UpdatePassword() {
+    const loginUser = useSelector(state => state.LoginUser);
     const [inputs, setInputs] = useState({
         presentPassword: "",
-        changePassword: "",
+        newPassword: "",
         confirmPassword: "",
     });
-
-
 
     const handleChange = (e) => {
         setInputs({
@@ -19,29 +19,47 @@ function UpdatePassword() {
         });
     }
 
+    const _checkPassword = (response) => {
+        let returnValue = false;
+
+        // 메시지 처리
+        if(response.data.code === AccountsCode.NOT_AUTHORIZED) {
+            console.log("세션 정보 없음");
+        }
+        else if(response.data.code === AccountsCode.NOT_MATCHES_NEW_PASSWORD) {
+            console.log("현재 비밀번호가 일치하지 않습니다.");
+        }
+
+        returnValue = response.data.data;
+
+        return returnValue;
+    }
+
+    const _updatePassword = (response) => {
+        if(response.data.code === AccountsCode.NOT_AUTHORIZED) {
+            console.log("세션 정보 없음");
+        }
+        else if(response.data.code === AccountsCode.INVALID_INPUT_VALUE) {
+            console.log("6자리 이상의 비밀번호를 입력해주세요.");
+        }
+        else if(response.data.code === "???") {
+            console.log("변경할 비밀번호가 일치하지 않습니다.")
+        }
+        else if(response.data.code === AccountsCode.SUCCESS) {
+            console.log("변경 완료");
+        }
+    }
+
     const onChangePassword = (e) => {
         e.preventDefault();
         
-        if(inputs.changePassword === inputs.confirmPassword) {
-            fetchAccount.updatePassword(inputs.changePassword, inputs.presentPassword)
-            .then(response => {
-                // Error: 현재 비밀번호가 일치하지 않아도 비밀번호 변경 가능
-
-
-                if(response.data.code === AccountsCode.NOT_AUTHORIZED) {
-                    console.log("세션 정보 없음");
-                }
-                else if(response.data.code === AccountsCode.NOT_MATCHES_NEW_PASSWORD) {
-                    console.log("현재 비밀번호가 일치하지 않습니다.");
-                }
-                else if(response.data.code === AccountsCode.INVALID_INPUT_VALUE) {
-                    console.log("6자리 이상의 비밀번호를 입력해주세요.");
-                }
-            });
-        }
-        else {
-            console.log("변경 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
-        }
+        fetchAccount.checkPassword(loginUser.data, inputs.presentPassword).then(response => {
+            if(_checkPassword(response)) {
+                fetchAccount.updatePassword(inputs.newPassword, inputs.confirmPassword).then(response => {
+                    _updatePassword(response);
+                });
+            }
+        });
     }
 
     return (
@@ -57,7 +75,7 @@ function UpdatePassword() {
                     onChange={(e) => handleChange(e)}
                 />
                 <StyledInput
-                    name="changePassword"
+                    name="newPassword"
                     type="password"
                     placeholder="변경 비밀번호"
                     onChange={(e) => handleChange(e)}

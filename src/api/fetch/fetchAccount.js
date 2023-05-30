@@ -42,6 +42,13 @@ const fetchAccount = {
         });
     },
 
+    async checkPassword(loginUser, password) {
+        return await axios.get(fetchUrl.checkPassword, {
+            "loginUser": loginUser,
+            "password": password
+        });
+    },
+
     async logout() {
         return await axios.post(fetchUrl.logout, {
             headers: {
@@ -85,7 +92,7 @@ const fetchAccount = {
 
     /** 
      * @param {string} newPassword 변경할 패스워드
-     * @param {string} confirmPassword 현재 패스워드
+     * @param {string} confirmPassword 비밀번호 일치 확인
     */
     async updatePassword(newPassword, confirmPassword) {
         return await axios.put(fetchUrl.updatePassword, {
@@ -97,5 +104,6 @@ const fetchAccount = {
             }
         });
     },
+
 }
 export default fetchAccount;
