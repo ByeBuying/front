@@ -1,20 +1,30 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import RegisterState from './RegisterState';
 import TermsText from './TermsText';
 
 function Register() {
+    const navigate = useNavigate();
     const [checkList, setCheckList] = useState({
         terms01: false,
         terms02: false,
         terms03: false
     });
-    const buttonRef = useRef();
+    const [checkAll, setCheckAll] = useState(false);
+    const [disabled, setDisabled] = useState(true);
     
     useEffect(() => {
         handleValidation();
     }, [checkList]);
+
+    const setChecked = (e) => {
+        setCheckList({
+            ...checkList,
+            [e.target.id]: e.target.checked
+        });
+        if(!e.target.checked) setCheckAll(false);
+    }
 
     const setAllCheck = (e) => {
         setCheckList({
@@ -22,26 +32,20 @@ function Register() {
             terms02: true,
             terms03: true
         });
+        setCheckAll(e.target.checked);
     }
-
-    const setChecked = (e) => {
-        setCheckList({
-            ...checkList,
-            [e.target.id]: e.target.checked
-        });
-    }
-
+    
     const handleValidation = () => {
-        console.log(buttonRef.current);
         if(!checkList.terms01 || !checkList.terms02) {
-            buttonRef.current.disabled=true;
+            setDisabled(true);
+        }
+        else {
+            setDisabled(false);
         }
     }
 
-    const handleNextButton = (e) => {
-        if(!checkList.terms01 || !checkList.terms02) {
-            alert("쇼핑몰 이용약관과 개인정보 수집항목 동의는 필수입니다.");
-        }
+    const handleButtonClick = (e) => {
+        navigate("/registerForm");
     }
 
     return (
@@ -49,7 +53,7 @@ function Register() {
             <KakaoRegisterButton>
                 <p>카카오톡 1초 회원가입</p>
             </KakaoRegisterButton>
-            <RegisterState />
+            <RegisterState currentState={1}/>
             <div className="mb-8">
                 <StyledLabel required={true}><input id="terms01" type="checkbox" onChange={(e) => setChecked(e)} checked={checkList.terms01}/> 쇼핑몰 이용약관 동의</StyledLabel>
                 <TermsTextDiv>
@@ -76,11 +80,12 @@ function Register() {
                     </p>
                 </TermsTextDiv>
             </div>
-
-            <StyledLabel><input id="checkAll" type="checkbox" onChange={(e) => setAllCheck(e)}/> 전체 동의하기</StyledLabel>
-        
-            <NextButton to="/registerForm" ref={buttonRef}>
-                <p className="text-white">약관동의</p>
+            <div>
+                <StyledLabel><input id="checkAll" type="checkbox" onChange={(e) => setAllCheck(e)} checked={checkAll}/> 전체 동의하기</StyledLabel>
+            </div>
+            
+            <NextButton disabled={disabled} onClick={(e) => handleButtonClick(e)}>
+                <p className="text-white" disabled={disabled} >약관동의</p>
             </NextButton>
         </Contents>
     );
@@ -133,7 +138,7 @@ const TermsTextDiv = styled.div`
     overflow-y: auto;
 `
 
-const NextButton = styled(Link)`
+const NextButton = styled.button`
     display: flex;
     width: 450px;
     height: 56px;
@@ -141,4 +146,8 @@ const NextButton = styled(Link)`
     background-color: rgba(15 23 42 / 1);
     justify-content: center;
     align-items: center;
+
+    ${props => props.disabled && `
+        background-color: rgba(15 23 42 / 0.4);
+    `}
 `

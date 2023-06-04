@@ -8,6 +8,7 @@ import MyPage from './view/pages/MyPage';
 import Layout from './view/pages/Layout';
 import UnregisterComplete from './view/components/unregister/UnregisterComplete';
 import Inactivate from './view/components/login/Inactivate';
+import RegisterComplete from './view/components/register/RegisterComplete';
 
 /**
  ** History
@@ -27,6 +28,7 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="register" element={<RegisterTerms />} />
             <Route path="registerForm" element={<RegisterForm />} />
+            <Route path="registerComplete" element={<RegisterComplete />} />
             <Route path="myPage" element={<MyPage />} />
             <Route path="inactivate" element={<Inactivate />} />
           </Route>
