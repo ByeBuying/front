@@ -9,5 +9,9 @@ export const assets = {
     couponIcon: BASE_URL + "icon/coupon_icon.svg",                              // 쿠폰
     rewardPointsIcon: BASE_URL + "icon/reward_points_icon.svg",                 // 적립금
     wishlistIcon: BASE_URL + "icon/wishlist_icon.svg",                          // 찜
+    termsAggrementIcon: BASE_URL + "icon/terms_aggrement.svg",                  // 약관동의(30%)
+    registerIcon: BASE_URL + "icon/register.svg",                               // 회원가입
+    completeRegisterIcon: BASE_URL + "icon/complete_register.svg",              // 회원가입 완료
+    congratulationsIcon: BASE_URL + "icon/congratulations.svg",                 // 축하해요
 }
 Object.freeze(assets);

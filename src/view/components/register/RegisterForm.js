@@ -36,7 +36,11 @@ function RegisterForm() {
             }
             else if(response.data.code === AccountsCode.SUCCESS) {
                 dispatch(messageToastSlice.actions.show("회원가입 성공!"));
-                navigate('/');
+                navigate('/registerComplete', {
+                    state: {
+                        name: inputs.name
+                    }
+                });
             }
         });
     }
@@ -51,7 +55,7 @@ function RegisterForm() {
                     confirm={() => setOpenMessageDialog(false)}
                 />
             )}
-            <RegisterState />
+            <RegisterState currentState={2}/>
             <StyledForm>
                 <InputDiv>
                     <InputLabelP>이름</InputLabelP>
@@ -104,7 +108,7 @@ function RegisterForm() {
                 </InputDiv>
             </StyledForm>
             <BottomButtonDiv>
-                <BottomButton>홈으로</BottomButton>
+                <BottomButton onClick={() => navigate('/')}>홈으로</BottomButton>
                 <BottomButton className="bg-[#222222] text-white"
                     onClick={requestAccountsNormal}>
                     회원가입
