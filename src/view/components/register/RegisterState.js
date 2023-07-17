@@ -1,23 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
-import AppLogo from '../../../logo.svg'
+import { assets } from '../../../model/lib/assets';
 
-function RegisterState() {
+function RegisterState({ currentState }) {
     return (
         <Contents>
             <ImageDiv>
-                <img src={AppLogo} />
-                <p>약관동의</p>
+                {/* State 1 */}
+                {currentState === 1 ? 
+                    (<StyledImg src={assets.termsAggrementIcon} alt="약관동의" />) : 
+                    (<StyledImg opacity={0.4} src={assets.termsAggrementIcon} alt="약관동의" />)
+                } <p>약관동의</p>
             </ImageDiv>
-            <img className="w-[22px]" src={AppLogo} />
             <ImageDiv>
-                <img src={AppLogo} />
-                <p>회원정보 입력</p>
+                {/* State 2 */}
+                {currentState === 2 ? 
+                    (<StyledImg src={assets.registerIcon} alt="회원정보 입력"/>) :
+                    (<StyledImg opacity={0.4} src={assets.registerIcon} alt="회원정보 입력"/>)
+                } <p>회원정보 입력</p>
             </ImageDiv>
-            <img className="w-[22px]" src={AppLogo} />
             <ImageDiv>
-                <img src={AppLogo} />
-                <p>회원정보 완료</p>
+                {/* State 3 */}
+                {currentState === 3 ?
+                    (<StyledImg src={assets.completeRegisterIcon} alt="회원가입 완료"/>) :
+                    (<StyledImg opacity={0.4} src={assets.completeRegisterIcon} alt="회원가입 완료"/>)
+                } <p>회원가입 완료</p>
             </ImageDiv>
         </Contents>
     )
@@ -42,4 +49,12 @@ const ImageDiv = styled.div`
     flex-direction: column;
     align-items: center;
     width: 25%;
+`
+
+const StyledImg = styled.img`
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+
+    opacity: ${props => props.opacity};
 `
